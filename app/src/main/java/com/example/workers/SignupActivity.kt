@@ -41,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val signupRequest = object : StringRequest(
                     Request.Method.POST,
-                    "http://192.168.33.73/signup.php",
+                    "http://ip주소/signup.php",
                     Response.Listener<String>{ response ->
                         if(response.toInt() == -1){ // 회원가입 실패
                             Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show()
