@@ -21,35 +21,43 @@ class LoginActivity : AppCompatActivity() {
             val loginId = binding.loginId.text.toString()
             val loginPw = binding.loginPw.text.toString()
 
-            // Volley를 이용한 http 통신
-            val loginRequest = object : StringRequest(
-                Request.Method.POST,
-                "http://ip주소/login.php",
-                Response.Listener<String>{ response ->
-                    if(response.toInt() == -1){ // 로그인 실패
-                        Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
-                        binding.loginId.text = null
-                        binding.loginPw.text = null
-                    }
-                    else if(response.toInt() == 1){ // 로그인 성공
-                        Toast.makeText(this, "로그인 성공하였습니다.", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    }
-                },
-                Response.ErrorListener { error ->
-                    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
-                }){
-                override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
-                    val params : MutableMap<String, String> = HashMap()
-                    params["id"] = loginId
-                    params["pw"] = loginPw
-                    return params
-                }
+            if(loginId.equals("")){
+                Toast.makeText(this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show()
             }
+            else if(loginPw.equals("")){
+                Toast.makeText(this, "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                // Volley를 이용한 http 통신
+                val loginRequest = object : StringRequest(
+                    Request.Method.POST,
+                    "http://192.168.33.73/login.php",
+                    Response.Listener<String>{ response ->
+                        if(response.toInt() == -1){ // 로그인 실패
+                            Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
+                            binding.loginId.text = null
+                            binding.loginPw.text = null
+                        }
+                        else if(response.toInt() == 1){ // 로그인 성공
+                            Toast.makeText(this, "로그인 성공하였습니다.", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    },
+                    Response.ErrorListener { error ->
+                        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+                    }){
+                    override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
+                        val params : MutableMap<String, String> = HashMap()
+                        params["id"] = loginId
+                        params["pw"] = loginPw
+                        return params
+                    }
+                }
 
-            val queue = Volley.newRequestQueue(this)
-            queue.add(loginRequest)
+                val queue = Volley.newRequestQueue(this)
+                queue.add(loginRequest)
+            }
         }
 
         binding.goToSignupBtn.setOnClickListener {
