@@ -44,12 +44,12 @@ class QrActivity : AppCompatActivity() {
             else { // QR코드가 스캔된 경우
                 val qrRequest = object : StringRequest(
                     Request.Method.POST,
-                    "http://IP주소/qr.php",
+                    BuildConfig.API_KEY + "qr.php",
                     Response.Listener<String>{ response ->
-                        if(response.toInt() == -1){ // QR 인증 실패
+                        if(response.toString().equals("-1")){ // QR 인증 실패
                             Toast.makeText(this, "등록된 안전모가 아닙니다.", Toast.LENGTH_LONG).show()
                         }
-                        else if(response.toInt() == 0){ // 안전모 등록 실패
+                        else if(response.toInt().equals("0")){ // 안전모 등록 실패
                             Toast.makeText(this, "이미 사용중인 안전모입니다.", Toast.LENGTH_LONG).show()
                         }
                         else{ // QR 인증 성공 + 안전모 등록 성공
