@@ -35,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
                     Request.Method.POST,
                     BuildConfig.API_KEY + "login.php",
                     Response.Listener<String>{ response ->
-                        Log.d("mobileApp", response.toString())
                         if(response.toString().equals("-1")){ // 로그인 실패
                             Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
                             binding.loginId.text = null
