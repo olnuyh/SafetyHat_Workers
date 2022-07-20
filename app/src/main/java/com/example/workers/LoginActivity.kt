@@ -33,9 +33,9 @@ class LoginActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val loginRequest = object : StringRequest(
                     Request.Method.POST,
-                    "http://IP주소/login.php",
+                    "http://172.20.10.4/login.php",
                     Response.Listener<String>{ response ->
-                        if(response.toInt() == -1){ // 로그인 실패
+                        if(response.toString().equals("-1")){ // 로그인 실패
                             Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show()
                             binding.loginId.text = null
                             binding.loginPw.text = null
