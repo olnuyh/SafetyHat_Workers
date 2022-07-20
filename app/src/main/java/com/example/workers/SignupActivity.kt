@@ -23,25 +23,25 @@ class SignupActivity : AppCompatActivity() {
             val signupName = binding.signupName.text.toString() // 사용자가 입력한 이름
             val signupId = binding.signupId.text.toString() // 사용자가 입력한 ID(사원번호)
             val signupPw = binding.signupPw.text.toString() // 사용자가 입력한 PW
-            val signupPwCheck = binding.signupPwCheck.text.toString()
+            val signupPwCheck = binding.signupPwCheck.text.toString() // 사용자가 입력한 PW 확인
 
-            if(signupName.equals("")){
+            if(signupName.equals("")){ // 이름을 입력하지 않은 경우
                 Toast.makeText(this, "이름을 입력하세요.", Toast.LENGTH_SHORT).show()
             }
-            else if(signupId.equals("")){
+            else if(signupId.equals("")){ // 아이디(사원번호)를 입력하지 않은 경우
                 Toast.makeText(this, "아이디(사원번호)를 입력하세요.", Toast.LENGTH_SHORT).show()
             }
-            else if(signupPw.equals("")){
+            else if(signupPw.equals("")){ // 비밀번호를 입력하지 않은 경우
                 Toast.makeText(this, "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show()
             }
-            else if(signupPwCheck.equals("")){
+            else if(signupPwCheck.equals("")){ // 비밀번호 확인을 입력하지 않은 경우
                 Toast.makeText(this, "비밀번호를 한번 더 입력하세요.", Toast.LENGTH_SHORT).show()
             }
-            else{
+            else{ // 모든 정보 입력 시
                 // Volley를 이용한 http 통신
                 val signupRequest = object : StringRequest(
                     Request.Method.POST,
-                    "http://192.168.33.73/signup.php",
+                    "http://IP주소/signup.php",
                     Response.Listener<String>{ response ->
                         if(response.toInt() == -1){ // 회원가입 실패
                             Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show()

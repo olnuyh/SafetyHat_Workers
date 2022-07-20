@@ -7,7 +7,7 @@
     tools:context=".QrActivity">
 
     <Button
-        android:id="@+id/qr_start_btn"
+        android:id="@+id/qrBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="출근 등록"

@@ -8,6 +8,10 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.workers.databinding.ActivityQrBinding
 import com.google.zxing.integration.android.IntentIntegrator
 
@@ -17,7 +21,7 @@ class QrActivity : AppCompatActivity() {
         val binding = ActivityQrBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.qrStartBtn.setOnClickListener {
+        binding.qrBtn.setOnClickListener {
             val integrator = IntentIntegrator(this)
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 여러가지 바코드중에 특정 바코드 설정 가능
             integrator.setPrompt("QR 코드를 스캔하여 주세요:)") // 스캔할 때 하단의 문구
@@ -31,38 +35,41 @@ class QrActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        // QR 코드를 찍은 결과를 변수에 담는다.
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        Log.d("TTT", "QR 코드 체크")
 
-        //결과가 있으면
         if (result != null) {
-            // 컨텐츠가 없으면
-            if (result.contents == null) {
-                //토스트를 띄운다.
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            if (result.contents == null) { // 뒤로가기 선택 시
+                Toast.makeText(this, "QR코드 인증이 취소되었습니다.", Toast.LENGTH_SHORT).show()
             }
-            // 컨텐츠가 있으면
-            else {
-                //토스트를 띄운다.
-                Toast.makeText(this, "scanned" + result.contents, Toast.LENGTH_LONG).show()
-                Log.d("TTT", "QR 코드 URL:${result.contents}")
-
-                // Dialog만들기
-                val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_qr, null)
-                val mBuilder = AlertDialog.Builder(this)
-                    .setView(mDialogView)
-                    .setTitle("안전모 QR 등록")
-
-                mBuilder.show()
-
-                val okButton = mDialogView.findViewById<Button>(R.id.dialog_success_btn)
-                okButton.setOnClickListener {
-                    startActivity(Intent(this,QrActivity::class.java))
+            else { // QR코드가 스캔된 경우
+                val qrRequest = object : StringRequest(
+                    Request.Method.POST,
+                    "http://IP주소/qr.php",
+                    Response.Listener<String>{ response ->
+                        if(response.toInt() == -1){ // QR 인증 실패
+                            Toast.makeText(this, "등록된 안전모가 아닙니다.", Toast.LENGTH_LONG).show()
+                        }
+                        else if(response.toInt() == 0){ // 안전모 등록 실패
+                            Toast.makeText(this, "이미 사용중인 안전모입니다.", Toast.LENGTH_LONG).show()
+                        }
+                        else{ // QR 인증 성공 + 안전모 등록 성공
+                            Toast.makeText(this, "안전모 등록이 완료되었습니다.", Toast.LENGTH_LONG).show()
+                        }
+                    },
+                    Response.ErrorListener { error ->
+                        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+                    }){
+                    override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
+                        val params : MutableMap<String, String> = HashMap()
+                        params["worker_pkey"] = MyApplication.prefs.getString("worker_pkey", "")
+                        params["hat_number"] = result.contents
+                        return params
+                    }
                 }
-
+                val queue = Volley.newRequestQueue(this)
+                queue.add(qrRequest)
             }
-            // 결과가 없으면
+
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
