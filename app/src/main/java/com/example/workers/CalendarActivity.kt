@@ -24,7 +24,7 @@ class CalendarActivity : AppCompatActivity() {
             // Volley를 이용한 http 통신
             val calendaruploadRequest = object : StringRequest(
                 Request.Method.POST,
-                "http://172.20.10.4/calendarget.php",
+                BuildConfig.API_KEY + "calendar_get.php",
                 Response.Listener<String>{ response ->
                     if(response.toString().equals("-1")){ // 실패
                         Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()
