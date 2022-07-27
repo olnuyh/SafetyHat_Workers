@@ -1,15 +1,23 @@
 package com.example.workers
 
+import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.CalendarView.OnDateChangeListener
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.workers.databinding.ActivityCalendarBinding
+import org.json.JSONArray
 import org.json.JSONObject
 
 class CalendarActivity : AppCompatActivity() {
@@ -21,56 +29,47 @@ class CalendarActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-
-            binding.calndarTest.text = String.format("%d-%d-%d", year, month+1, dayOfMonth)
-//            val year = year.toString()
-//            val month = month.toString()
-//            val day = dayOfMonth.toString()
-              val date=year.toString()+"="+month.toString()+"="+dayOfMonth.toString()
+            val date = year.toString()+"-"+(month + 1).toString()+"-"+dayOfMonth.toString()
 
             // Volley를 이용한 http 통신
             val calendaruploadRequest = object : StringRequest(
                 Request.Method.POST,
-                BuildConfig.API_KEY + "calendar_get.php",
+                BuildConfig.API_KEY + "read_calendar.php",
                 Response.Listener<String>{ response ->
-                    if(response.toString().equals("-1")){ // 실패
-                        Toast.makeText(this, "실패", Toast.LENGTH_LONG).show()
+
+                    val jsonObject : JSONObject = JSONObject(response)
+                    val array = jsonObject.getJSONArray("response")
+
+                    if(array.length() == 0){
+                        binding.scheduleLayout.visibility = View.GONE
                     }
                     else{
-                        //Toast.makeText(this, response, Toast.LENGTH_LONG).show()
+                        binding.scheduleLayout.removeAllViews()
 
-                        val jsonObject : JSONObject = JSONObject(response)
-                        val Array = jsonObject.getJSONArray("webnautes")
-                        for (i in 0 until Array.length()) {
-                            val Object = Array.getJSONObject(i)
-                            Log.d("--  work", Object.getString("work"))
-                            Log.d("--  startdate", Object.getString("startdate"))
-                            binding.calendarTv1.setText(Array.getJSONObject(0).getString("work"))
-                            binding.calendarTv2.setText(Array.getJSONObject(1).getString("work"))
-
+                        for (i in 0 until array.length()) {
+                            val textView = TextView(this)
+                            val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                            layoutParams.setMargins(100, 40, 0, 0)
+                            textView.layoutParams = layoutParams
+                            textView.text = array.getJSONObject(i).getString("calendar_contents")
+                            binding.scheduleLayout.addView(textView)
                         }
-
-
+                        binding.scheduleLayout.visibility = View.VISIBLE
                     }
                 },
                 Response.ErrorListener { error ->
                     Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
                 }){
                 override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
-                val params : MutableMap<String, String> = HashMap()
-//                    params["year"] = year
-//                    params["month"] = month
-//                    params["day"] = day
+                    val params : MutableMap<String, String> = HashMap()
                     params["date"] = date
 
-                return params
+                    return params
                 }
             }
 
             val queue = Volley.newRequestQueue(this)
             queue.add(calendaruploadRequest)
         }
-
-        }
-
+     }
 }
