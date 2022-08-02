@@ -47,6 +47,7 @@ class SignupActivity : AppCompatActivity() {
                             Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show()
                             binding.signupId.text = null
                             binding.signupPw.text = null
+                            binding.signupPwCheck.text = null
                         }
                         else if(response.equals("1")){ // 회원가입 성공
                             Toast.makeText(this, "회원 가입되었습니다.", Toast.LENGTH_LONG).show()
