@@ -19,5 +19,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, QrActivity::class.java)
             startActivity(intent)
         }
+
+        binding.logoutBtn.setOnClickListener {
+            MyApplication.prefs.clear()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

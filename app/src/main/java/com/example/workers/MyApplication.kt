@@ -2,6 +2,7 @@ package com.example.workers
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 
 class MyApplication : Application() {
     companion object{
@@ -23,5 +24,9 @@ class SharedPreferencesManager(context : Context){
 
     fun setString(key:String, value:String) {
         prefs.edit().putString(key, value).apply()
+    }
+
+    fun clear(){
+        prefs.edit().clear().commit()
     }
 }
