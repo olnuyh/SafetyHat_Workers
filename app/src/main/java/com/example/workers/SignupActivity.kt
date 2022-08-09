@@ -41,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val signupRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "signup.php",
+                    BuildConfig.API_KEY + "workers_signup.php",
                     Response.Listener<String>{ response ->
                         if(response.toString().equals("-1")){ // 회원가입 실패
                             Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show()
