@@ -3,6 +3,7 @@ package com.example.workers
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
@@ -76,10 +77,12 @@ class MainActivity : AppCompatActivity() {
             BuildConfig.API_KEY + "read_information.php",
             Response.Listener<String>{ response ->
 
-                val jsonObject : JSONObject = JSONObject(response)
-                val array = jsonObject.getJSONArray("response")
+                Log.d("mobileApp", response.toString())
 
-                name = array.getJSONObject(0).getString("name")
+                val jsonObject : JSONObject = JSONObject(response)
+                val worker = jsonObject.getJSONArray("response").getJSONObject(0)
+
+                name = worker.getString("name")
                 binding.mainName.text = name
 
                 val navigationView: NavigationView =  findViewById(R.id.main_drawer_view)
@@ -88,15 +91,28 @@ class MainActivity : AppCompatActivity() {
                 val navEmplId : TextView = headerView.findViewById(R.id.navigationEmplId)
                 navName.text = name
                 navEmplId.text = MyApplication.prefs.getString("worker_id", "")
-                binding.mainContents.text = name + " 님은 " + today + "구역에서 까지 근무입니다."
 
-                status = array.getJSONObject(0).getString("status").toInt()
-
-                if(status == 0){
-                    binding.workBtn.isEnabled = true
+                if(worker.getString("area").equals("")){
+                    binding.mainContents.text = name + " 님은 " + today + " 등록된 근무 내역이 없습니다."
                 }
                 else{
-                    binding.leaveBtn.isEnabled = true
+                    val start_time = SimpleDateFormat("a H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("start")))
+                    val end_time = SimpleDateFormat("a H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("end")))
+                    binding.mainContents.text = name + " 님은 " + today + " " + worker.getString("area") +
+                            "구역에서 " + start_time + " ~ " + end_time +"까지 근무입니다."
+
+                    status = worker.getString("status").toInt()
+
+                    if(status == 0){
+                        binding.workBtn.isEnabled = true
+                    }
+                    else if(status == 1){
+                        binding.leaveBtn.isEnabled = true
+                    }
+                    else if(status == 2){
+                        binding.workBtn.isEnabled = false
+                        binding.leaveBtn.isEnabled = false
+                    }
                 }
             },
             Response.ErrorListener { error ->
