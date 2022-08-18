@@ -1,27 +1,35 @@
 package com.example.workers
 
+import android.R.attr.bitmap
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.workers.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
+import org.json.JSONArray
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import kotlin.properties.Delegates
 
@@ -41,6 +49,24 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         setSupportActionBar(binding.toolBar)
+
+        //프로필 불러오기
+        val readprofileRequest = object : StringRequest(
+            Request.Method.POST,
+            BuildConfig.API_KEY + "read_profile.php",
+            Response.Listener<String>{ response ->
+                Toast.makeText(this,response.toString(),Toast.LENGTH_LONG).show()
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+            }){
+
+        }
+        val queue2 = Volley.newRequestQueue(this)
+        queue2.add(readprofileRequest)
+
+
+
 
 //        if(requestQueue == null){
 //            requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -124,6 +150,7 @@ class MainActivity : AppCompatActivity() {
         val setqueue = Volley.newRequestQueue(this)
         setqueue.add(request)
 
+
         val navView=binding.mainDrawerView
         val headerView=navView.getHeaderView(0)
         val editbtn=headerView.findViewById<Button>(R.id.navigationEditBtn)
@@ -133,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         editbtn.setOnClickListener {
             camerabtn.visibility=View.VISIBLE
             editbtn.visibility=View.GONE
-            savebtn.visibility=View.GONE
+            savebtn.visibility=View.VISIBLE
         }
         camerabtn.setOnClickListener{
 //            val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -146,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         savebtn.setOnClickListener {
-
+            uploadDataToDB()
         }
 
 
@@ -261,15 +288,63 @@ class MainActivity : AppCompatActivity() {
 
 
 
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        val mainnavView = findViewById<NavigationView>(R.id.main_drawer_view)
+//        val headerView2=mainnavView.getHeaderView(0)
+//        val profile=headerView2.findViewById<ImageView>(R.id.navigationProfile)
+//        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.data != null) {
+//            val selectedImageUri = data.data
+//            profile.setImageURI(selectedImageUri)
+//        }
+//    }
+
+    var encodeImageString: String? = null
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         val mainnavView = findViewById<NavigationView>(R.id.main_drawer_view)
         val headerView2=mainnavView.getHeaderView(0)
         val profile=headerView2.findViewById<ImageView>(R.id.navigationProfile)
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.data != null) {
             val selectedImageUri = data.data
-            profile.setImageURI(selectedImageUri)
+            try {
+                val inputStream: InputStream? = contentResolver.openInputStream(selectedImageUri!!)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                profile.setImageBitmap(bitmap)
+                encodeBitmapImage(bitmap)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun encodeBitmapImage(bitmap: Bitmap) {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val bytesOfImage: ByteArray = byteArrayOutputStream.toByteArray()
+        encodeImageString = Base64.encodeToString(bytesOfImage, Base64.DEFAULT)
+    }
+
+    private fun uploadDataToDB() {
+        // Volley를 이용한 http 통신
+        val writeprofileRequest = object : StringRequest(
+            Request.Method.POST,
+            BuildConfig.API_KEY + "write_profile.php",
+            Response.Listener<String>{ response ->
+
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+            }){
+            override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
+                val params : MutableMap<String, String> = HashMap()
+                params["profile"] = encodeImageString.toString()
+                return params
+            }
+        }
+        val queue = Volley.newRequestQueue(this)
+        queue.add(writeprofileRequest)
     }
 
 
