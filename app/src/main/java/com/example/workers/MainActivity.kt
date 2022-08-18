@@ -3,7 +3,10 @@ package com.example.workers
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +29,8 @@ import kotlin.properties.Delegates
 class MainActivity : AppCompatActivity() {
     lateinit var toggle : ActionBarDrawerToggle
 
+    private val GET_GALLERY_IMAGE = 200
+
     //var requestQueue: RequestQueue? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -37,11 +42,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolBar)
 
-
 //        if(requestQueue == null){
 //            requestQueue = Volley.newRequestQueue(getApplicationContext());
 //        }
-
 
         val request= object : StringRequest(
             Method.GET, BuildConfig.WEATHER_API_KEY,
@@ -121,6 +124,30 @@ class MainActivity : AppCompatActivity() {
         val setqueue = Volley.newRequestQueue(this)
         setqueue.add(request)
 
+        val navView=binding.mainDrawerView
+        val headerView=navView.getHeaderView(0)
+        val editbtn=headerView.findViewById<Button>(R.id.navigationEditBtn)
+        val camerabtn=headerView.findViewById<Button>(R.id.navigationCameraBtn)
+        val savebtn=headerView.findViewById<Button>(R.id.navigationSaveBtn)
+
+        editbtn.setOnClickListener {
+            camerabtn.visibility=View.VISIBLE
+            editbtn.visibility=View.GONE
+            savebtn.visibility=View.GONE
+        }
+        camerabtn.setOnClickListener{
+//            val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
+//            intent.setType("image/*")
+//            startActivityForResult(intent,GALLERY)
+
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+            startActivityForResult(intent, GET_GALLERY_IMAGE)
+        }
+
+        savebtn.setOnClickListener {
+
+        }
 
 
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close)
@@ -128,6 +155,7 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         binding.mainDrawerView.setNavigationItemSelectedListener {
+
             when(it.itemId){
                 R.id.menuNotification -> {
                     val intent = Intent(this, NotificationActivity::class.java)
@@ -151,6 +179,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+
             }
             true
         }
@@ -231,6 +260,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val mainnavView = findViewById<NavigationView>(R.id.main_drawer_view)
+        val headerView2=mainnavView.getHeaderView(0)
+        val profile=headerView2.findViewById<ImageView>(R.id.navigationProfile)
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.data != null) {
+            val selectedImageUri = data.data
+            profile.setImageURI(selectedImageUri)
+        }
+    }
 
 
 
