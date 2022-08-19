@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:id="@+id/navigationHeader"
     android:background="@color/purple_500">
+
+    <ImageView
+        android:id="@+id/navigationProfile"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/profile"/>
+
+    <Button
+        android:id="@+id/navigationCameraBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카메라 아이콘"
+        android:visibility="invisible"
+        android:layout_marginStart="120dp"/>
 
     <TextView
         android:id="@+id/navigationName"
@@ -27,4 +42,22 @@
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="30dp"
         android:hint="사원번호" />
+
+    <Button
+        android:id="@+id/navigationEditBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="편집"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        />
+    <Button
+        android:id="@+id/navigationSaveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        />
 </RelativeLayout>

@@ -4,8 +4,12 @@
     package="com.example.workers">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
+    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!--오디오 사용 권한-->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -43,11 +47,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"
@@ -64,7 +63,13 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- qr코드 세로로 바꾸기.. -->
         <activity
