@@ -6,12 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".CalendarActivity">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:background="#3e4f87"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></View>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="7sp"
+        android:textColor="#de000000"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="작업 일정표"
+        android:textAlignment="center"
+        android:gravity="center"/>
+
+    <!--Code for layer -->
+    <View
+        android:layout_width="335dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/calender_line"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></View>
+    <!-- Code for drawable -->
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+        <stroke
+            android:width="2dp"
+            android:color="#b8e2de" />
+    </shape>
+
+    <View
+        android:layout_width="335dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/calender_line"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></View>
+    <!-- Code for drawable -->
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+        <stroke
+            android:width="2dp"
+            android:color="#b8e2de" />
+    </shape>
+
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +94,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
