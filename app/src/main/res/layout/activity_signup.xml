@@ -141,7 +141,7 @@
         android:layout_marginStart="268dp"
         android:layout_marginTop="617dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/signupBtn"
+        android:src="@drawable/signup_btn"
         android:text="가입하기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -153,7 +153,7 @@
         android:layout_marginTop="617dp"
         android:layout_marginEnd="268dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/loginBtn2"
+        android:src="@drawable/login_btn2"
         android:text="로그인"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
