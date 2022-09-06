@@ -19,6 +19,11 @@ class SignupActivity : AppCompatActivity() {
         val binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.loginBtn.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.signupBtn.setOnClickListener {
             val signupName = binding.signupName.text.toString() // 사용자가 입력한 이름
             val signupId = binding.signupId.text.toString() // 사용자가 입력한 ID(사원번호)
