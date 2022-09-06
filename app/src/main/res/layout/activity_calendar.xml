@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="작업 일정표"
+        android:text="작업 일정표"
         android:textAlignment="center"
         android:gravity="center"/>
 

@@ -19,7 +19,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="긴급연락" />
+        android:text="긴급연락" />
 
 
 
@@ -84,6 +84,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/condition"
-        tools:text="전송" />
+        android:text="전송" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

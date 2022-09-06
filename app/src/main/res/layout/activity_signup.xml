@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="REGISTER" />
+        android:text="REGISTER" />
 
 
     <TextView
@@ -34,7 +34,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="이름" />
+        android:text="이름" />
 
 
     <EditText
@@ -61,7 +61,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="사원번호" />
+        android:text="사원번호" />
 
 
     <EditText
@@ -90,7 +90,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="비밀번호" />
+        android:text="비밀번호" />
 
 
     <EditText
@@ -118,7 +118,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="비밀번호 확인" />
+        android:text="비밀번호 확인" />
 
 
     <EditText
@@ -170,7 +170,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="로그인" />
+        android:text="로그인" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -184,6 +184,6 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="가입하기" />
+        android:text="가입하기" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

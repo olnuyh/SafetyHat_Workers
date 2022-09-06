@@ -19,7 +19,7 @@
         android:textSize="50sp"
         android:textStyle="normal"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="LOGIN" />
+        android:text="LOGIN" />
 
     <EditText
         android:id="@+id/loginId"
@@ -75,7 +75,7 @@
         tools:text="비밀번호 찾기" />
 
     <ImageButton
-        android:id="@+id/loginBtn"
+        android:id="@+id/loginbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="375dp"
