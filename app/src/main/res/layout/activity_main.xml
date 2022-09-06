@@ -82,17 +82,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mainContents" />
 
-        <TextView
-            android:id="@+id/dateView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/workBtn"
-            app:layout_constraintTop_toBottomOf="@+id/workBtn"/>
 
         <TextView
             android:id="@+id/cityView"
@@ -100,8 +89,8 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/dateView"
-            app:layout_constraintStart_toStartOf="@+id/dateView"/>
+            app:layout_constraintTop_toBottomOf="@+id/workBtn"
+            app:layout_constraintStart_toStartOf="@+id/workBtn"/>
 
         <TextView
             android:id="@+id/weatherView"

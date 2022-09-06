@@ -19,7 +19,7 @@
         android:textSize="50sp"
         android:textStyle="normal"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="LOGIN" />
+        />
 
     <EditText
         android:id="@+id/loginId"
@@ -29,7 +29,6 @@
         android:layout_marginTop="345dp"
         android:ems="10"
         android:hint="사원번호"
-        android:background = "null"
         android:inputType="number"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
@@ -38,7 +37,9 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="사원번호" />
+        android:fontFamily="@font/a12"
+        android:background="@null"
+         />
 
     <EditText
         android:id="@+id/loginPw"
@@ -48,7 +49,6 @@
         android:layout_marginTop="410dp"
         android:ems="10"
         android:hint="Password"
-        android:background = "null"
         android:inputType="number"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
@@ -57,7 +57,9 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="비밀번호" />
+        android:fontFamily="@font/a12"
+        android:background="@null"
+        />
 
     <android.widget.Button
         android:id="@+id/findBtn"
@@ -65,14 +67,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
         android:layout_marginTop="482dp"
-        android:background = "null"
         android:lineSpacingExtra="10sp"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="비밀번호 찾기" />
+        android:background="@null"
+        android:text="비밀번호 찾기"
+        android:fontFamily="@font/a12"/>
 
     <ImageButton
         android:id="@+id/loginbtn"
@@ -81,7 +84,7 @@
         android:layout_marginTop="375dp"
         android:layout_marginEnd="33dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/login_enterBtn"
+        android:src="@drawable/login_enter"
         android:text="로그인"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPw"
@@ -94,7 +97,7 @@
         android:layout_marginTop="588dp"
         android:layout_marginEnd="268dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/loginBtn2"
+        android:src="@drawable/login_btn2"
         android:text="회원가입"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -111,7 +114,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="회원가입" />
+        android:text="회원가입"
+        android:fontFamily="@font/a14"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
