@@ -50,20 +50,23 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
+                R.id.menuWork -> {
+
+                }
                 R.id.menuNotification -> {
                     val intent = Intent(this, NotificationActivity::class.java)
-                    startActivity(intent)
-                }
-                R.id.menuSalary -> {
-                    val intent = Intent(this, SalaryActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.menuCalendar -> {
                     val intent = Intent(this, CalendarActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menuMyPage -> {
-                    val intent = Intent(this, MypageActivity::class.java)
+                R.id.menuSos -> {
+                    val intent = Intent(this, SosActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuSalary -> {
+                    val intent = Intent(this, SalaryActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.logout -> {
@@ -189,6 +192,7 @@ class MainActivity : AppCompatActivity() {
                 val worker = jsonObject.getJSONArray("response").getJSONObject(0)
 
                 name = worker.getString("name")
+                MyApplication.prefs.setString("worker_name", name)
                 binding.mainName.text = name
 
                 val navName : TextView = headerView.findViewById(R.id.navigationName)
