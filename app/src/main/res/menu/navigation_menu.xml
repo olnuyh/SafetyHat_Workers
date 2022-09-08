@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuNotification"
-        android:icon="@android:drawable/ic_menu_share"
-        android:title="공지사항"/>
+        android:id="@+id/menuQr"
+        android:icon="@drawable/qr_icon"
+        android:title="출퇴근 등록"/>
+
     <item
-        android:id="@+id/menuSalary"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="급여"/>
+        android:id="@+id/menuNotification"
+        android:icon="@drawable/notification_icon"
+        android:title="공지사항"/>
+
     <item
         android:id="@+id/menuCalendar"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="산업일정표"/>
+        android:icon="@drawable/calendar_icon"
+        android:title="작업 일정표"/>
+
     <item
-        android:id="@+id/menuMyPage"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="마이페이지"/>
+        android:id="@+id/menuSos"
+        android:icon="@drawable/sos_icon"
+        android:title="긴급연락"/>
+
+    <item
+        android:id="@+id/menuSalary"
+        android:icon="@drawable/salary_icon"
+        android:title="급여" />
+
 
     <item
         android:id="@+id/logout"
-        android:title="로그아웃"/>
+        android:title="로그아웃" />
+
 </menu>
