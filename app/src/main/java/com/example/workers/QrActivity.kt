@@ -29,7 +29,7 @@ class QrActivity : AppCompatActivity() {
         status = intent.getIntExtra("status", 0)
 
         if (status == 0) { // 출근 등록을 하려는 경우
-            binding.qrBtn.text = "출근 등록"
+            binding.qrName.text = "출근 등록"
 
             binding.qrBtn.setOnClickListener {
                 val integrator = IntentIntegrator(this)
@@ -41,7 +41,7 @@ class QrActivity : AppCompatActivity() {
                 integrator.initiateScan() // 스캔
             }
         } else { // 퇴근 등록을 하려는 경우
-            binding.qrBtn.text = "퇴근 등록"
+            binding.qrName.text = "퇴근 등록"
 
             binding.qrBtn.setOnClickListener {
                 val integrator = IntentIntegrator(this)

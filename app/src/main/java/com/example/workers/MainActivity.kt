@@ -245,7 +245,9 @@ class MainActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         queue.add(mainRequest)
 
-        val weatherRequest= object : StringRequest(
+
+        //날씨
+       val weatherRequest= object : StringRequest(
             Method.GET, BuildConfig.WEATHER_API_KEY,
             Response.Listener<String>{ response ->
                 val jsonObject = JSONObject(response)
@@ -306,8 +308,6 @@ class MainActivity : AppCompatActivity() {
                 val tempK = JSONObject(jsonObject.getString("main"))
                 val tempDo = Math.round((tempK.getDouble("temp") - 273.15) * 100) / 100.0
                 binding.tempView.text="$tempDo°C"
-
-
             },
             Response.ErrorListener { error ->
                 Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()

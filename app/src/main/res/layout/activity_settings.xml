@@ -4,29 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sos"
     tools:context=".SettingsActivity">
 
-    <Button
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="100dp"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="4sp"
+        android:textColor="#de000000"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="긴급연락" />
+
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#3e4f87"></View>
+
+    <ImageButton
         android:id="@+id/speakBtn"
         android:layout_width="113dp"
         android:layout_height="86dp"
-        android:text="SPEAK"
+        android:layout_marginTop="525dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/mic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아래 버튼을 눌러 무전 시작"
-        app:layout_constraintStart_toStartOf="@+id/speakBtn"
-        app:layout_constraintTop_toBottomOf="@+id/speakBtn"/>
+        android:layout_marginTop="5dp"
+        android:text="텍스트 입력"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speakBtn" />
 
     <TextView
         android:id="@+id/condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="상태체크"
-        app:layout_constraintStart_toStartOf="@+id/result"
-        app:layout_constraintTop_toBottomOf="@+id/result"/>
+        android:layout_marginTop="9dp"
+        android:text="버튼을 누르고 음성인식을 시작하세요"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="88dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/btn_corner"
+        app:layout_constraintEnd_toEndOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/condition"></View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:gravity="center_horizontal"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="5sp"
+        android:textColor="#3c3c3c"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/condition"
+        android:text="전송" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
