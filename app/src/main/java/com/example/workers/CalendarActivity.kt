@@ -1,24 +1,19 @@
 package com.example.workers
 
-import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.CalendarView.OnDateChangeListener
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.workers.databinding.ActivityCalendarBinding
-import org.json.JSONArray
 import org.json.JSONObject
+
 
 class CalendarActivity : AppCompatActivity() {
     private lateinit var binding :ActivityCalendarBinding
@@ -53,6 +48,15 @@ class CalendarActivity : AppCompatActivity() {
                             textView.layoutParams = layoutParams
                             textView.text = array.getJSONObject(i).getString("calendar_contents")
                             binding.scheduleLayout.addView(textView)
+
+                            val drawable = resources.getDrawable(R.drawable.calendar_point)
+                            val imageView= ImageView(this)
+                            val layoutParams2 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                            layoutParams2.setMargins(5, -45, 0, 0)
+                            imageView.layoutParams = layoutParams2
+                            imageView.setImageDrawable(drawable)
+                            binding.scheduleLayout.addView(imageView)
+
                         }
                         binding.scheduleLayout.visibility = View.VISIBLE
                     }

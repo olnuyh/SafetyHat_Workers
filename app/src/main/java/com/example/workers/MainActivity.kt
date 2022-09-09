@@ -50,8 +50,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.menuWork -> {
-
+                R.id.menuQr -> {
+                    val intent = Intent(this, QrActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.menuNotification -> {
                     val intent = Intent(this, NotificationActivity::class.java)
@@ -82,12 +83,17 @@ class MainActivity : AppCompatActivity() {
         val navView = binding.mainDrawerView
         val headerView = navView.getHeaderView(0)
 
-        val editbtn=headerView.findViewById<Button>(R.id.navigationEditBtn)
-        val camerabtn=headerView.findViewById<Button>(R.id.navigationCameraBtn)
-        val savebtn=headerView.findViewById<Button>(R.id.navigationSaveBtn)
+        val editbtn=headerView.findViewById<ImageButton>(R.id.navigationEditBtn)
+        val camerabtn=headerView.findViewById<ImageButton>(R.id.navigationCameraBtn)
+        val savebtn=headerView.findViewById<ImageButton>(R.id.navigationSaveBtn)
         val profileImage=headerView.findViewById<ImageView>(R.id.navigationProfile)
+        val xbtn=headerView.findViewById<ImageButton>(R.id.navigationCancel)
 
         var encodeImageString: String? = null
+
+        xbtn.setOnClickListener {
+            binding.drawerLayout.closeDrawers()
+        }
 
         editbtn.setOnClickListener {
             camerabtn.visibility=View.VISIBLE
@@ -104,9 +110,9 @@ class MainActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 inputStream!!.close()
                 inputStream = null
-                profileImage.setImageBitmap(bitmap)
 
                 val resizedBitmap = resize(bitmap)
+                profileImage.setImageBitmap(resizedBitmap)
 
                 //DB에 저장할 형태로 변경
                 val byteArrayOutputStream = ByteArrayOutputStream()
@@ -166,11 +172,11 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             })
-            dialog.setNeutralButton("사진 다시 선택", DialogInterface.OnClickListener { dialog, which ->
-                savebtn.visibility = View.VISIBLE
-                editbtn.visibility = View.GONE
-                camerabtn.visibility=View.VISIBLE
-            })
+//            dialog.setNeutralButton("사진 다시 선택", DialogInterface.OnClickListener { dialog, which ->
+//                savebtn.visibility = View.VISIBLE
+//                editbtn.visibility = View.GONE
+//                camerabtn.visibility=View.VISIBLE
+//            })
             dialog.show()
         }
 
@@ -179,7 +185,6 @@ class MainActivity : AppCompatActivity() {
 
         val today = SimpleDateFormat("yyyy년 M월 d일").format(System.currentTimeMillis())
 
-        binding.mainEmplId.text = MyApplication.prefs.getString("worker_id", "")
         binding.workBtn.isEnabled = false
         binding.leaveBtn.isEnabled = false
 
@@ -193,7 +198,6 @@ class MainActivity : AppCompatActivity() {
 
                 name = worker.getString("name")
                 MyApplication.prefs.setString("worker_name", name)
-                binding.mainName.text = name
 
                 val navName : TextView = headerView.findViewById(R.id.navigationName)
                 val navEmplId : TextView = headerView.findViewById(R.id.navigationEmplId)
@@ -202,34 +206,44 @@ class MainActivity : AppCompatActivity() {
                 navEmplId.text = MyApplication.prefs.getString("worker_id", "")
 
                 if(worker.getString("area").equals("")){
-                    binding.mainContents.text = name + " 님은 " + today + " 등록된 근무 내역이 없습니다."
+                    binding.mainName.text = ""
+                    binding.mainArea.text = name + " 님은 " + today
+                    binding.mainDate.text = "등록된 작업 일정이 없습니다"
                 }
                 else{
-                    val start_time = SimpleDateFormat("a H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("start")))
-                    val end_time = SimpleDateFormat("a H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("end")))
-                    binding.mainContents.text = name + " 님은 " + today + " " + worker.getString("area") +
-                            "구역에서 " + start_time + " ~ " + end_time +"까지 근무입니다."
+                    val start_time = SimpleDateFormat("H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("start")))
+                    val end_time = SimpleDateFormat("H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("end")))
+                    binding.mainName.text = name + " 님은 " + today
+                    binding.mainArea.text = worker.getString("area") + "구역에서 "
+                    binding.mainDate.text = start_time + " ~ " + end_time +"까지 근무입니다"
 
                     status = worker.getString("status").toInt()
 
-                    if(status == 0){
+                    if(status == 0){ // 출근 전 상태
                         binding.workBtn.isEnabled = true
+                        binding.workBtn.setImageResource(R.drawable.come_btn)
                     }
-                    else if(status == 1){
+                    else if(status == 1){ // 출근 후, 퇴근 전 상태
                         binding.leaveBtn.isEnabled = true
+                        binding.leaveBtn.setImageResource(R.drawable.come_btn)
                     }
-                    else if(status == 2){
+                    else if(status == 2){ // 퇴근 후 상태
                         binding.workBtn.isEnabled = false
                         binding.leaveBtn.isEnabled = false
+                        binding.workBtn.setImageResource(R.drawable.out_btn)
+                        binding.leaveBtn.setImageResource(R.drawable.out_btn)
                     }
                 }
 
+                /*
                 if(!worker.getString("profile").equals("")){
                     val imageBytes = Base64.decode(worker.getString("profile"), 0)
                     val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
                     binding.mainProfile.setImageBitmap(image)
                     profileImage.setImageBitmap(image)
                 }
+
+                 */
             },
             Response.ErrorListener { error ->
                 Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()

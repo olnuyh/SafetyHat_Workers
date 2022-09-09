@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity">
 
@@ -21,76 +22,105 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/mainProfile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolBar"
-            app:srcCompat="@drawable/profile" />
-
         <TextView
             android:id="@+id/mainName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="이름"
+            android:layout_marginTop="130dp"
+            android:text="이름과 날짜"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainProfile" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/mainEmplId"
+            android:id="@+id/mainArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="사원번호"
+            android:layout_marginTop="165dp"
+            android:text="근무구역"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainName" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/mainContents"
+            android:id="@+id/mainDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="내용"
+            android:layout_marginTop="200dp"
+            android:text="시간"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainEmplId" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ImageButton
             android:id="@+id/workBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/out_btn"
             android:text="출근"
             app:layout_constraintEnd_toStartOf="@+id/leaveBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainContents" />
+            app:layout_constraintTop_toBottomOf="@+id/mainArea" />
 
-        <Button
+        <ImageButton
             android:id="@+id/leaveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="60dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/out_btn"
             android:text="퇴근"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainContents" />
+            app:layout_constraintTop_toBottomOf="@+id/mainArea" />
 
+        <TextView
+            android:id="@+id/wearherTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="500dp"
+            android:textColor="#3e4f87"
+            android:text="오늘의 날씨"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/cityView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="540dp"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/workBtn"
-            app:layout_constraintStart_toStartOf="@+id/workBtn"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tempView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="550dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/weathericon"
+            android:layout_width="350dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="487dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/weatherView"
@@ -102,22 +132,101 @@
             app:layout_constraintTop_toBottomOf="@+id/cityView" />
 
         <TextView
-            android:id="@+id/tempView"
+            android:id="@+id/sosTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/cityView"
-            app:layout_constraintTop_toBottomOf="@+id/cityView" />
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="330dp"
+            android:textColor="#3e4f87"
+            android:text="긴급연락"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/weathericon"
-            android:layout_width="300dp"
-            android:layout_height="120dp"
-
-            android:layout_marginTop="30dp"
+        <ImageButton
+            android:id="@+id/sosMic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="350dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/mic_btn"
+            android:text="MIC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/workBtn" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sosSend"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/mic_stroke"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="텍스트 입력"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/sosBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="320dp"
+            android:layout_marginTop="400dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/mic_send"
+            android:text="MIC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sostext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="439dp"
+            android:text="음성 버튼을 누르고 녹음을 시작하세요"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/mainNotification"
+            android:layout_width="79dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="620dp"
+            android:layout_marginEnd="24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/notification_btn"
+            android:text="공지사항"
+            app:layout_constraintEnd_toStartOf="@+id/mainSalary"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/mainSalary"
+            android:layout_width="79dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="620dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/salary_btn"
+            android:text="급여내역"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/mainCalender"
+            android:layout_width="79dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="620dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/calender_btn"
+            android:text="작업일정표"
+            app:layout_constraintStart_toEndOf="@+id/mainSalary"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,6 +236,11 @@
         android:id="@+id/main_drawer_view"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/navigation_menu"/>
+        app:menu="@menu/navigation_menu"
+        app:itemIconTint="#7e84a3"
+        app:itemTextColor="#99000000"
+        app:itemTextAppearance="@font/robotomedium"
+        />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

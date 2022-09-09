@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuWork"
-        android:icon="@android:drawable/ic_menu_share"
+        android:id="@+id/menuQr"
+        android:icon="@drawable/qr_icon"
         android:title="출퇴근 등록"/>
 
     <item
         android:id="@+id/menuNotification"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/notification_icon"
         android:title="공지사항"/>
 
     <item
@@ -17,15 +17,15 @@
 
     <item
         android:id="@+id/menuSos"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/sos_icon"
         android:title="긴급연락"/>
 
     <item
         android:id="@+id/menuSalary"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="급여"/>
+        android:icon="@drawable/salary_icon"
+        android:title="급여" />
 
     <item
         android:id="@+id/logout"
-        android:title="로그아웃"/>
+        android:title="로그아웃" />
 </menu>

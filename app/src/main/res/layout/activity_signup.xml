@@ -10,7 +10,6 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ygo140"
         android:layout_marginTop="65dp"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="-26sp"
@@ -20,11 +19,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="REGISTER" />
+        android:text="REGISTER"
+        android:fontFamily="@font/ygo140"/>
 
 
     <TextView
-        android:id="@+id/nameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
@@ -34,152 +33,111 @@
         android:textColor="#99000000"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:fontFamily="@font/a12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="이름" />
+        android:text="이름"
+        android:fontFamily="@font/a12"/>
 
-    <View
-        android:layout_width="295dp"
-        android:layout_height="52dp"
-        android:background="@drawable/stroke"
-        android:layout_marginTop="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTV">
-    </View>
 
     <EditText
         android:id="@+id/signupName"
-        android:layout_width="250dp"
+        android:layout_width="295dp"
         android:layout_height="52dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="180dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTV"
-        android:background="@null"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/stroke"/>
 
     <TextView
-        android:id="@+id/idTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="258dp"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
         android:textColor="#99000000"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:fontFamily="@font/a12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupName"
-        android:text="사원번호" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="사원번호"
+        android:fontFamily="@font/a12"/>
 
-
-    <View
-        android:layout_width="295dp"
-        android:layout_height="52dp"
-        android:background="@drawable/stroke"
-        android:layout_marginTop="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idTV">
-    </View>
 
     <EditText
         android:id="@+id/signupId"
-        android:layout_width="250dp"
+        android:layout_width="295dp"
         android:layout_height="52dp"
-        android:layout_marginTop="9dp"
-        android:background="@null"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/stroke"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idTV" />
+        app:layout_constraintTop_toBottomOf="@+id/signupName" />
 
     <TextView
-        android:id="@+id/pwTV"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="358dp"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
         android:textColor="#99000000"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:fontFamily="@font/a12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupId"
-        android:text="비밀번호" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="비밀번호"
+        android:fontFamily="@font/a12"/>
 
-
-    <View
-        android:layout_width="295dp"
-        android:layout_height="52dp"
-        android:background="@drawable/stroke"
-        android:layout_marginTop="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwTV" >
-    </View>
 
     <EditText
         android:id="@+id/signupPw"
-        android:layout_width="250dp"
+        android:layout_width="295dp"
         android:layout_height="52dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwTV"
-        android:background="@null"/>
+        app:layout_constraintTop_toBottomOf="@+id/signupId"
+        android:background="@drawable/stroke"/>
 
     <TextView
-        android:id="@+id/checkPW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="465dp"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
         android:textColor="#99000000"
         android:textSize="16sp"
         android:textStyle="normal"
-        android:fontFamily="@font/a12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupPw"
-        android:text="비밀번호 확인" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="비밀번호 확인"
+        android:fontFamily="@font/a12"/>
 
-
-    <View
-        android:layout_width="295dp"
-        android:layout_height="52dp"
-        android:background="@drawable/stroke"
-        android:layout_marginTop="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkPW" >
-    </View>
 
     <EditText
         android:id="@+id/signupPwCheck"
-        android:layout_width="250dp"
+        android:layout_width="295dp"
         android:layout_height="52dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="53dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkPW"
-        android:background="@null"/>
+        app:layout_constraintTop_toBottomOf="@+id/signupPw"
+        android:background="@drawable/stroke"/>
 
     <ImageButton
         android:id="@+id/signupBtn"
@@ -208,31 +166,31 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="635dp"
+        android:fontFamily="@font/a14"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="2sp"
+        android:text="로그인"
         android:textColor="#666666"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="normal"
-        android:fontFamily="@font/a14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="로그인" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="635dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginTop="638dp"
+        android:layout_marginEnd="23dp"
+        android:fontFamily="@font/a14"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="2sp"
+        android:text="가입하기"
         android:textColor="#666666"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/a14"
-        android:text="가입하기" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

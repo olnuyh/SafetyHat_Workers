@@ -50,7 +50,7 @@
         android:layout_marginTop="410dp"
         android:ems="10"
         android:hint="비밀번호"
-        android:inputType="number"
+        android:inputType= "textPassword"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
         android:textColor="#99000000"
