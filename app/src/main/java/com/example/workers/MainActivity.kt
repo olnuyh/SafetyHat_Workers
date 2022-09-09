@@ -235,15 +235,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                /*
                 if(!worker.getString("profile").equals("")){
                     val imageBytes = Base64.decode(worker.getString("profile"), 0)
                     val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                    binding.mainProfile.setImageBitmap(image)
                     profileImage.setImageBitmap(image)
                 }
-
-                 */
             },
             Response.ErrorListener { error ->
                 Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
