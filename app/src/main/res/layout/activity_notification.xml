@@ -16,6 +16,7 @@
         android:letterSpacing="0.01"
         android:lineSpacingExtra="4sp"
         android:text="공지사항"
+        android:fontFamily="@font/a14"
         android:textColor="#de000000"
         android:textSize="20sp"
         android:textStyle="normal"
