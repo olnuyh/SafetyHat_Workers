@@ -50,20 +50,24 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.menuNotification -> {
-                    val intent = Intent(this, NotificationActivity::class.java)
+                R.id.menuQr -> {
+                    val intent = Intent(this, QrActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menuSalary -> {
-                    val intent = Intent(this, SalaryActivity::class.java)
+                R.id.menuNotification -> {
+                    val intent = Intent(this, NotificationActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.menuCalendar -> {
                     val intent = Intent(this, CalendarActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.menuMyPage -> {
-                    val intent = Intent(this, MypageActivity::class.java)
+                R.id.menuSos -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuSalary -> {
+                    val intent = Intent(this, SalaryActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.logout -> {
@@ -79,12 +83,17 @@ class MainActivity : AppCompatActivity() {
         val navView = binding.mainDrawerView
         val headerView = navView.getHeaderView(0)
 
-        val editbtn=headerView.findViewById<Button>(R.id.navigationEditBtn)
-        val camerabtn=headerView.findViewById<Button>(R.id.navigationCameraBtn)
-        val savebtn=headerView.findViewById<Button>(R.id.navigationSaveBtn)
+        val editbtn=headerView.findViewById<ImageButton>(R.id.navigationEditBtn)
+        val camerabtn=headerView.findViewById<ImageButton>(R.id.navigationCameraBtn)
+        val savebtn=headerView.findViewById<ImageButton>(R.id.navigationSaveBtn)
         val profileImage=headerView.findViewById<ImageView>(R.id.navigationProfile)
+        val xbtn=headerView.findViewById<ImageButton>(R.id.navigationCancel)
 
         var encodeImageString: String? = null
+
+        xbtn.setOnClickListener {
+            binding.drawerLayout.closeDrawers()
+        }
 
         editbtn.setOnClickListener {
             camerabtn.visibility=View.VISIBLE
@@ -101,9 +110,9 @@ class MainActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 inputStream!!.close()
                 inputStream = null
-                profileImage.setImageBitmap(bitmap)
 
                 val resizedBitmap = resize(bitmap)
+                profileImage.setImageBitmap(resizedBitmap)
 
                 //DB에 저장할 형태로 변경
                 val byteArrayOutputStream = ByteArrayOutputStream()
@@ -163,11 +172,11 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             })
-            dialog.setNeutralButton("사진 다시 선택", DialogInterface.OnClickListener { dialog, which ->
-                savebtn.visibility = View.VISIBLE
-                editbtn.visibility = View.GONE
-                camerabtn.visibility=View.VISIBLE
-            })
+//            dialog.setNeutralButton("사진 다시 선택", DialogInterface.OnClickListener { dialog, which ->
+//                savebtn.visibility = View.VISIBLE
+//                editbtn.visibility = View.GONE
+//                camerabtn.visibility=View.VISIBLE
+//            })
             dialog.show()
         }
 

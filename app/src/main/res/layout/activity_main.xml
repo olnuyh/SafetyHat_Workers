@@ -236,6 +236,11 @@
         android:id="@+id/main_drawer_view"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/navigation_menu"/>
+        app:menu="@menu/navigation_menu"
+        app:itemIconTint="#7e84a3"
+        app:itemTextColor="#99000000"
+        app:itemTextAppearance="@font/robotomedium"
+        />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
