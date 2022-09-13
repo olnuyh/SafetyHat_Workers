@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/menuCalendar"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/calendar_icon2"
         android:title="작업일정표"/>
 
     <item
@@ -27,5 +27,6 @@
 
     <item
         android:id="@+id/logout"
+        android:icon="@drawable/logout_icon"
         android:title="로그아웃" />
 </menu>

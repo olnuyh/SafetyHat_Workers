@@ -9,16 +9,17 @@
         android:id="@+id/notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/a14"
+        android:textStyle="normal"
+        android:textSize="20sp"
+        android:textColor="#de000000"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="4sp"
         android:text="공지사항"
-        android:textColor="#de000000"
-        android:textSize="20sp"
-        android:textStyle="normal"
+        android:fontFamily="@font/a14"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="34dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="34dp"/>
 
     <View
         android:id="@+id/notificationLine"

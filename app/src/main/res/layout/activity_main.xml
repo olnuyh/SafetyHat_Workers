@@ -28,10 +28,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
             android:text="이름과 날짜"
+            android:textStyle="normal"
             android:textSize="16sp"
+            android:textColor="#de000000"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <TextView
             android:id="@+id/mainArea"
@@ -39,10 +44,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="165dp"
             android:text="근무구역"
+            android:textStyle="normal"
             android:textSize="16sp"
+            android:textColor="#de000000"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <TextView
             android:id="@+id/mainDate"
@@ -50,35 +60,70 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
             android:text="시간"
+            android:textStyle="normal"
             android:textSize="16sp"
+            android:textColor="#de000000"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <ImageButton
             android:id="@+id/workBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="14dp"
             android:background="@android:color/transparent"
             android:src="@drawable/out_btn"
             android:text="출근"
             app:layout_constraintEnd_toStartOf="@+id/leaveBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainArea" />
+            app:layout_constraintTop_toBottomOf="@+id/mainDate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="17sp"
+            android:textColor="#3e4f87"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="5sp"
+            android:fontFamily="@font/a14"
+            android:text="출근"
+            app:layout_constraintTop_toBottomOf="@+id/mainDate"
+            android:layout_marginTop="29dp"
+            android:layout_marginStart="102dp"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageButton
             android:id="@+id/leaveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="14dp"
             android:layout_marginEnd="60dp"
             android:background="@android:color/transparent"
             android:src="@drawable/out_btn"
             android:text="퇴근"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainArea" />
+            app:layout_constraintTop_toBottomOf="@+id/mainDate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="17sp"
+            android:textColor="#3e4f87"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="5sp"
+            android:fontFamily="@font/a14"
+            android:text="퇴근"
+           app:layout_constraintTop_toBottomOf="@+id/mainDate"
+            android:layout_marginTop="29dp"
+            android:layout_marginStart="235dp"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/wearherTitle"
@@ -86,50 +131,48 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="500dp"
-            android:textColor="#3e4f87"
             android:text="오늘의 날씨"
-            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#3e4f87"
+            android:lineSpacingExtra="7sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <TextView
             android:id="@+id/cityView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="540dp"
-            android:textSize="30sp"
+            android:layout_marginTop="550dp"
+            android:layout_marginEnd="80dp"
+            android:text="서울"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/tempView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <TextView
             android:id="@+id/tempView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
             android:layout_marginTop="550dp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <ImageView
             android:id="@+id/weathericon"
-            android:layout_width="350dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="487dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="105dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="476dp"
+            app:layout_constraintStart_toEndOf="@+id/tempView"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/weatherView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/tempView"
-            app:layout_constraintStart_toStartOf="@+id/cityView"
-            app:layout_constraintTop_toBottomOf="@+id/cityView" />
 
         <TextView
             android:id="@+id/sosTitle"
@@ -137,11 +180,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="330dp"
-            android:textColor="#3e4f87"
             android:text="긴급연락"
-            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#3e4f87"
+            android:lineSpacingExtra="7sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <ImageButton
             android:id="@+id/sosMic"
@@ -162,12 +208,16 @@
             android:layout_marginStart="62dp"
             android:layout_marginTop="400dp"
             android:background="@drawable/mic_stroke"
-            android:elevation="10dp"
+            android:textStyle="normal"
+            android:textSize="9sp"
+            android:textColor="#707070"
+            android:lineSpacingExtra="3sp"
             android:gravity="center"
             android:text="텍스트 입력"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <ImageButton
             android:id="@+id/sosBtn"
@@ -187,10 +237,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="439dp"
             android:text="음성 버튼을 누르고 녹음을 시작하세요"
-            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textSize="9sp"
+            android:textColor="#707070"
+            android:lineSpacingExtra="3sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/nanumsquarer"/>
 
         <ImageButton
             android:id="@+id/mainNotification"

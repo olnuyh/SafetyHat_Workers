@@ -262,7 +262,7 @@ class MainActivity : AppCompatActivity() {
             Response.Listener<String>{ response ->
                 val jsonObject = JSONObject(response)
                 val city = jsonObject.getString("name")
-                binding.cityView.text=city
+                //binding.cityView.text=city
 
                 val weatherJson = jsonObject.getJSONArray("weather")
                 val weatherObj = weatherJson.getJSONObject(0)
@@ -290,7 +290,6 @@ class MainActivity : AppCompatActivity() {
                 val imageUrl13n = "http://openweathermap.org/img/wn/13n@2x.png"
                 val imageUrl50n = "http://openweathermap.org/img/wn/50n@2x.png"
 
-                binding.weatherView.text=weather
 
                 when (icon) {
                     "01d" -> Glide.with(this).load(imageUrl01d).into(imageView)
