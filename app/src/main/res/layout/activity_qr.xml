@@ -24,26 +24,15 @@
         android:elevation="20dp"
         >
 
-        <View
-            android:id="@+id/qrBtn"
+        <ImageView
+            android:id="@+id/loginBtn"
             android:layout_width="186dp"
             android:layout_height="196dp"
-            android:background="#cecece"
+            android:background="@android:color/transparent"
+            android:src="@drawable/qr_view"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="55dp">
-        </View>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:textSize="14sp"
-            android:textColor="#ffffff"
-            android:lineSpacingExtra="5sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="149dp"
-            android:text="터치하세요" />
-
+        </ImageView>
 
         <TextView
             android:id="@+id/qrName"

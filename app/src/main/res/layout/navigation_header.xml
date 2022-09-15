@@ -26,11 +26,11 @@
         android:id="@+id/navigationCameraBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/navigation_camera"
-        android:background="@null"
         android:layout_marginStart="84.9dp"
         android:layout_marginTop="84dp"
-        android:visibility="invisible"/>
+        android:background="@null"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/navigation_camera" />
 
     <TextView
         android:id="@+id/navigationName"

@@ -6,19 +6,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SosActivity">
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sosRecyclerView"/>
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="100dp"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="4sp"
+        android:textColor="#de000000"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="긴급연락"
+        android:fontFamily="@font/a14"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <Button
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sosRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/micBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/micBtn"
-            android:text="녹음"/>
+            android:background="@android:color/transparent"
+            android:src="@drawable/mic"
+            android:text="녹음" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,5 +55,6 @@
             android:id="@+id/saveContentsBtn"
             android:text="전송"
             android:enabled="false"/>
+
     </LinearLayout>
 </LinearLayout>

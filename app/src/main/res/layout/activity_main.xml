@@ -167,9 +167,9 @@
 
         <ImageView
             android:id="@+id/weathericon"
-            android:layout_width="105dp"
+            android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="476dp"
             app:layout_constraintStart_toEndOf="@+id/tempView"
             app:layout_constraintTop_toTopOf="parent" />

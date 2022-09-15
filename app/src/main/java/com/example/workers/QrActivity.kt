@@ -31,7 +31,7 @@ class QrActivity : AppCompatActivity() {
         if (status == 0) { // 출근 등록을 하려는 경우
             binding.qrName.text = "출근 등록"
 
-            binding.qrBtn.setOnClickListener {
+            binding.loginBtn.setOnClickListener {
                 val integrator = IntentIntegrator(this)
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 여러가지 바코드중에 특정 바코드 설정 가능
                 integrator.setPrompt("QR 코드를 스캔 해주세요") // 스캔할 때 하단의 문구
@@ -43,7 +43,7 @@ class QrActivity : AppCompatActivity() {
         } else { // 퇴근 등록을 하려는 경우
             binding.qrName.text = "퇴근 등록"
 
-            binding.qrBtn.setOnClickListener {
+            binding.loginBtn.setOnClickListener {
                 val integrator = IntentIntegrator(this)
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 여러가지 바코드중에 특정 바코드 설정 가능
                 integrator.setPrompt("QR 코드를 스캔 해주세요") // 스캔할 때 하단의 문구

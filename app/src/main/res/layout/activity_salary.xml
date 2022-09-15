@@ -6,96 +6,111 @@
     android:layout_height="match_parent"
     tools:context=".SalaryActivity">
 
-
     <TextView
         android:id="@+id/salaryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:text="급여"
+        android:layout_marginTop="125dp"
+        android:text="    님의   월 급여"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/salaryPrevBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="126dp"
-        android:text="이전"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="125dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/left_arrowbtn"
+        android:text="이전 달"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/salaryNextBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="126dp"
-        android:layout_marginEnd="30dp"
-        android:text="다음"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="60dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/right_arrowbtn"
+        android:text="다음 달"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="34dp"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/salaryTitle">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:layout_weight="1"
+            android:background="@drawable/graph_stroke"
             android:gravity="center" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:layout_weight="1"
+            android:background="@drawable/graph_stroke"
             android:gravity="center"
             android:text="근무시간" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="33dp"
+            android:layout_weight="2"
+            android:background="@drawable/graph_stroke"
             android:gravity="center"
             android:text="총 합계" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <ImageButton
             android:id="@+id/upDownBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:layout_weight="1"
+            android:background="@drawable/graph_stroke2"
             android:gravity="center"
-            android:src="@drawable/notification_down"/>
+            android:src="@drawable/notification_down" />
 
         <TextView
             android:id="@+id/workTime"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:layout_weight="1"
+            android:background="@drawable/graph_stroke2"
             android:gravity="center"
-            android:text="근무시간" />
+            android:text="n시간" />
 
         <TextView
             android:id="@+id/workSalary"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="33dp"
+            android:layout_weight="2"
+            android:background="@drawable/graph_stroke2"
             android:gravity="center"
-            android:text="총 합계" />
+            android:text="nnnnnn원" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
