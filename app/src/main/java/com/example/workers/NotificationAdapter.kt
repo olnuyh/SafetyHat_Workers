@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.workers.databinding.ItemNotificationBinding
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 
 class NotificationViewHolder(val binding : ItemNotificationBinding) : RecyclerView.ViewHolder(binding.root)
 class NotificationAdapter(val context : Context, val arr : JSONArray) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -31,8 +32,10 @@ class NotificationAdapter(val context : Context, val arr : JSONArray) : Recycler
         binding.itemTitle.text = notification.getString("notification_title")
         binding.itemContent.text = notification.getString("notification_contents")
         binding.itemName.text="관리자 "+notification.getString("notification_writer")
-        val insert_date = notification.getString("insert_date")
-        val date = insert_date.substring(0, insert_date.indexOf(" "))
+
+        val insert_date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(notification.getString("insert_date"))
+        val date = SimpleDateFormat("yyyy.MM.dd").format(insert_date)
+
         binding.itemDate.text=date
 
         binding.ivItemUpImg.setOnClickListener {
