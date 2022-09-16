@@ -78,6 +78,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.findBtn.setOnClickListener {
+            val intent = Intent(this, PasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.goToSignupBtn.setOnClickListener { // 회원가입 페이지로 이동
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)

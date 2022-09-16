@@ -28,6 +28,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".PasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".SosActivity"
             android:exported="false" />
         <activity
@@ -41,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="false" />
@@ -53,7 +56,7 @@
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
