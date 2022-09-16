@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="327dp"

@@ -89,7 +89,7 @@ class QrActivity : AppCompatActivity() {
                                 dialog.dialogName.text = intent.getStringExtra("name")
                                 dialog.dialogEmplId.text = MyApplication.prefs.getString("worker_id", "")
                                 val input = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
-                                dialog.dialogContents.text = SimpleDateFormat("yyyy년 M월 d일 a h:mm").format(input) + " 출근을 등록합니다."
+                                dialog.dialogContents.text = SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat("a HH:mm").format(input) + " 출근을 등록합니다"
                                 dialog.dialogOkBtn.setOnClickListener {
                                     finish()
                                     val intent = Intent(this, MainActivity::class.java)
@@ -125,7 +125,7 @@ class QrActivity : AppCompatActivity() {
                                 dialog.dialogName.text = intent.getStringExtra("name")
                                 dialog.dialogEmplId.text = MyApplication.prefs.getString("worker_id", "")
                                 val input = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
-                                dialog.dialogContents.text = SimpleDateFormat("yyyy년 M월 d일 a h:mm").format(input) + " 퇴근을 등록합니다."
+                                dialog.dialogContents.text = SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat("a HH:mm").format(input) + " 퇴근을 등록합니다"
                                 dialog.dialogOkBtn.setOnClickListener {
                                     finish()
                                     val intent = Intent(this, MainActivity::class.java)
