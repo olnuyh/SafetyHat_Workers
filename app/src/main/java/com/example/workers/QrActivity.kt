@@ -53,6 +53,10 @@ class QrActivity : AppCompatActivity() {
                 integrator.initiateScan() // 스캔
             }
         }
+
+        binding.goToMainBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onDestroy() {

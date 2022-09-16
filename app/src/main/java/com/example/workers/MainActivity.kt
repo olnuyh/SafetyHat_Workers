@@ -337,7 +337,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("name", name)
             intent.putExtra("status", status)
             startActivity(intent)
-            finish()
         }
 
         binding.leaveBtn.setOnClickListener {
@@ -345,7 +344,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("name", name)
             intent.putExtra("status", status)
             startActivity(intent)
-            finish()
         }
     }
 
