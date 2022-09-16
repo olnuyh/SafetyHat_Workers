@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#3e4f87"
-        app:layout_constraintTop_toTopOf="parent"></View>
 
     <FrameLayout
         android:layout_width="327dp"
@@ -21,8 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="20dp"
-        >
+        android:elevation="20dp" >
 
         <ImageView
             android:id="@+id/loginBtn"
