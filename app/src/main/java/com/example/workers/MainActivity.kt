@@ -220,6 +220,7 @@ class MainActivity : AppCompatActivity() {
                     binding.mainDate.text = start_time + " ~ " + end_time +"까지 근무입니다"
 
                     status = worker.getString("status").toInt()
+                    MyApplication.prefs.setString("worker_status", worker.getString("status"))
 
                     if(status == 0){ // 출근 전 상태
                         binding.workBtn.isEnabled = true
@@ -335,14 +336,12 @@ class MainActivity : AppCompatActivity() {
         binding.workBtn.setOnClickListener {
             val intent = Intent(this, QrActivity::class.java)
             intent.putExtra("name", name)
-            intent.putExtra("status", status)
             startActivity(intent)
         }
 
         binding.leaveBtn.setOnClickListener {
             val intent = Intent(this, QrActivity::class.java)
             intent.putExtra("name", name)
-            intent.putExtra("status", status)
             startActivity(intent)
         }
     }
