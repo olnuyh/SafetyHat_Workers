@@ -17,24 +17,27 @@
         android:text="공지사항"
         android:fontFamily="@font/a14"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="110dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="34dp"/>
 
     <View
         android:id="@+id/notificationLine"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/notification_291"
-        app:layout_constraintTop_toBottomOf="@+id/notification"
-        android:layout_marginTop="11.5dp">
-    </View>
+        android:layout_width="335dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/calender_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></View>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notificationRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:layout_marginTop="36dp"
+        android:layout_height="560dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notification">

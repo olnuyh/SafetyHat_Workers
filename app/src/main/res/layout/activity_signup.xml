@@ -224,15 +224,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="635dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/a14"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="2sp"
+        android:text="가입하기"
         android:textColor="#666666"
         android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/a14"
-        android:text="가입하기" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
