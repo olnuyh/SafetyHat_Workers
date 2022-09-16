@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         toggle.syncState()
 
         binding.mainDrawerView.setNavigationItemSelectedListener {
@@ -70,14 +71,15 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, SalaryActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.logout -> {
-                    MyApplication.prefs.clear()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
             }
             true
+        }
+
+        binding.logout.setOnClickListener {
+            MyApplication.prefs.clear()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         val navView = binding.mainDrawerView

@@ -3,7 +3,8 @@
     xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="203dp"
-    android:id="@+id/navigationHeader">
+    android:id="@+id/navigationHeader"
+    android:background="@color/main">
 
     <ImageView
         android:id="@+id/navigationProfile"
@@ -20,7 +21,8 @@
         app:srcCompat="@drawable/header_x_btn"
         android:layout_marginStart="244.7dp"
         android:layout_marginTop="8.7dp"
-        android:background="#ffffff"/>
+        android:background="@null"
+        app:tint="#ffffff"/>
 
     <ImageButton
         android:id="@+id/navigationCameraBtn"
@@ -40,7 +42,7 @@
         android:hint="이름"
         android:textStyle="normal"
         android:textSize="20sp"
-        android:textColor="#de000000"
+        android:textColor="#ffffff"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="4sp"
         android:layout_marginTop="144dp"
@@ -54,7 +56,7 @@
         android:layout_marginStart="25dp"
         android:textStyle="normal"
         android:textSize="16sp"
-        android:textColor="#de000000"
+        android:textColor="#ffffff"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
         android:fontFamily="@font/a12"
@@ -67,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="209dp"
         android:layout_marginTop="170dp"
-        android:background="@null"
+        android:background="@android:color/transparent"
         app:srcCompat="@drawable/navigation_edit" />
 
     <ImageButton
@@ -78,8 +80,7 @@
         android:layout_marginTop="170dp"
         android:background="@null"
         app:srcCompat="@drawable/navigation_save"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
