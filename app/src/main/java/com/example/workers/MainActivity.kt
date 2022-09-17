@@ -344,6 +344,28 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("name", name)
             startActivity(intent)
         }
+
+        binding.mainNotification.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.mainSalary.setOnClickListener {
+            val intent = Intent(this, SalaryActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.mainCalender.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
+
+        /*
+        binding.mainSos.setOnClickListener{
+
+        }
+
+         */
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
