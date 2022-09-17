@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,7 +59,6 @@ class SalaryActivity : AppCompatActivity() {
                 count = 1
 
                 binding.upDownBtn.setBackgroundResource(R.drawable.notification_up)
-            }else if(count == 1){
                 binding.salaryRecyclerView.visibility = View.GONE
                 count = 0
 

@@ -4,15 +4,15 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workers.databinding.ActivitySosBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,12 +27,16 @@ class SosActivity : AppCompatActivity() {
     lateinit var speechRecognizer : SpeechRecognizer
     val database = Firebase.database("https://safetyhat-default-rtdb.asia-southeast1.firebasedatabase.app/")
     val ref = database.getReference("SosMessages")
+    val messageList = ArrayList<SosMessage>()
+    lateinit var adapter : SosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySosBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.sosRecyclerView.layoutManager = LinearLayoutManager(this)
 
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
@@ -45,6 +49,7 @@ class SosActivity : AppCompatActivity() {
 
         // 마이크 버튼 눌러서 음성인식 시작
         binding.micBtn.setOnClickListener {
+            binding.recordedContents.text = ""
             // 새 SpeechRecognizer 생성
             speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
             speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
@@ -57,19 +62,32 @@ class SosActivity : AppCompatActivity() {
                 binding.recordedContents.text.toString(),
                 SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()))
             ref.push().setValue(message)
+
+            binding.recordedContents.text = ""
+            binding.explanationContents.text = "버튼을 누르고 음성인식을 시작하세요"
         }
 
         ref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                messageList.clear()
+
                 for(msg in snapshot.children){
-                    Log.d("mobileApp", msg.toString())
+                    val message = msg.getValue(SosMessage::class.java)
+                    if(message?.pkey.equals(MyApplication.prefs.getString("worker_pkey", ""))){
+                        messageList.add(message!!)
+                    }
                 }
+
+                adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
+
+        adapter = SosAdapter(this, messageList)
+        binding.sosRecyclerView.adapter = adapter
     }
 
     // 리스너 설정
