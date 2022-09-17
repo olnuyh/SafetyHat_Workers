@@ -111,18 +111,18 @@ class SosActivity : AppCompatActivity() {
         // 오류 발생했을 때 호출
         override fun onError(error: Int) {
             val message = when (error) {
-                SpeechRecognizer.ERROR_AUDIO -> "오디오 에러"
-                SpeechRecognizer.ERROR_CLIENT -> "클라이언트 에러"
-                SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> "퍼미션 없음"
-                SpeechRecognizer.ERROR_NETWORK -> "네트워크 에러"
-                SpeechRecognizer.ERROR_NETWORK_TIMEOUT -> "네트웍 타임아웃"
-                SpeechRecognizer.ERROR_NO_MATCH -> "찾을 수 없음"
-                SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> "RECOGNIZER 가 바쁨"
-                SpeechRecognizer.ERROR_SERVER -> "서버가 이상함"
-                SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "말하는 시간초과"
-                else -> "알 수 없는 오류임"
+                SpeechRecognizer.ERROR_AUDIO -> "오디오 에러가 발생했습니다"
+                SpeechRecognizer.ERROR_CLIENT -> "클라이언트 에러가 발생했습니다"
+                SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> "권한이 부족합니다"
+                SpeechRecognizer.ERROR_NETWORK -> "네트워크 에러가 발생했습니다"
+                SpeechRecognizer.ERROR_NETWORK_TIMEOUT -> "네트워크 작업 시간이 초과되었습니다"
+                SpeechRecognizer.ERROR_NO_MATCH -> "일치하는 인식 결과가 없습니다"
+                SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> "RecognitionService가 사용 중입니다"
+                SpeechRecognizer.ERROR_SERVER -> "서버가 오류 상태를 보냅니다"
+                SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "음성인식 시간을 초과했습니다"
+                else -> "알 수 없는 에러가 발생했습니다"
             }
-            binding.explanationContents.text = "에러 발생: $message"
+            binding.explanationContents.text = "$message"
         }
         // 인식 결과가 준비되면 호출
         override fun onResults(results: Bundle) {
