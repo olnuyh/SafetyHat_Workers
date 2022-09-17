@@ -38,10 +38,13 @@ class SosActivity : AppCompatActivity() {
 
         binding.sosRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        /*
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.RECORD_AUDIO), 0)
         }
+
+         */
 
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
@@ -65,6 +68,7 @@ class SosActivity : AppCompatActivity() {
 
             binding.recordedContents.text = ""
             binding.explanationContents.text = "버튼을 누르고 음성인식을 시작하세요"
+            binding.saveContentsBtn.isEnabled = false
         }
 
         ref.addValueEventListener(object : ValueEventListener{

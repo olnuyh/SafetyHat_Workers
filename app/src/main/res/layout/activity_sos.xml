@@ -75,6 +75,7 @@
         android:layout_marginTop="22dp"
         android:background="@drawable/btn_corner"
         android:text="전송"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/explanationContents" />
