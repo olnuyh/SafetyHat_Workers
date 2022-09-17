@@ -58,7 +58,7 @@
         android:id="@+id/goToMainBtn"
         android:layout_width="138dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_corner"
         android:text="닫기"
         app:layout_constraintEnd_toEndOf="parent"

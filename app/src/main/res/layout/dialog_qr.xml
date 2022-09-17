@@ -5,7 +5,6 @@
         android:layout_width="287dp"
         android:layout_height="398dp"
         android:layout_gravity="center"
-        android:layout_marginTop="181dp"
         android:background="@drawable/login_corner"
         android:elevation="20dp">
 
