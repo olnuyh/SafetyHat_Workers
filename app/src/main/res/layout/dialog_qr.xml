@@ -8,6 +8,17 @@
         android:background="@drawable/login_corner"
         android:elevation="20dp">
 
+        <ImageButton
+            android:id="@+id/cancelButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#ffffff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/x_btn" />
+
         <ImageView
             android:id="@+id/profileImg"
             android:layout_width="88dp"

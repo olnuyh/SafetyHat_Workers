@@ -1,61 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/sos_bg"
     tools:context=".SosActivity">
 
     <TextView
+        android:id="@id/sosTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="114dp"
+        android:fontFamily="@font/a14"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="4sp"
+        android:text="긴급연락"
         android:textColor="#de000000"
         android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="긴급연락"
-        android:fontFamily="@font/a14"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/sosLine"
+        android:layout_width="335dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/calender_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></View>
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sosRecyclerView"
         android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sosTitle"/>
+
+    <ImageButton
+        android:id="@+id/micBtn"
+        android:layout_width="113dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="561dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/mic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recordedContents"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/a12"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/micBtn" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sosRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/explanationContents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/a12"
+        android:text="버튼을 누르고 음성인식을 시작하세요"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recordedContents" />
 
-        <ImageButton
-            android:id="@+id/micBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/mic"
-            android:text="녹음" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveContentsBtn"
+        android:layout_width="88dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/btn_corner"
+        android:text="전송"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/explanationContents" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/explanationContents"
-            android:text="버튼을 누르고 녹음을 시작하세요!"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/recordedContents"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/saveContentsBtn"
-            android:text="전송"
-            android:enabled="false"/>
-
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

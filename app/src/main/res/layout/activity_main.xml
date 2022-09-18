@@ -190,7 +190,7 @@
             android:fontFamily="@font/nanumsquarer"/>
 
         <ImageButton
-            android:id="@+id/sosMic"
+            android:id="@+id/sosMicBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="350dp"
@@ -202,7 +202,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sosSend"
+            android:id="@+id/sosSendMessage"
             android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_marginStart="62dp"
@@ -213,26 +213,25 @@
             android:textColor="#707070"
             android:lineSpacingExtra="3sp"
             android:gravity="center"
-            android:text="텍스트 입력"
+            android:text=""
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:fontFamily="@font/nanumsquarer"/>
 
         <ImageButton
-            android:id="@+id/sosBtn"
+            android:id="@+id/sosSendBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="320dp"
             android:layout_marginTop="400dp"
             android:background="@android:color/transparent"
             android:src="@drawable/mic_send"
-            android:text="MIC"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sostext"
+            android:id="@+id/sosText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="439dp"

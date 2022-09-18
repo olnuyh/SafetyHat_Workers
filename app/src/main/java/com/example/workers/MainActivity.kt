@@ -1,13 +1,18 @@
 package com.example.workers
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
@@ -18,6 +23,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -25,19 +32,31 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.workers.databinding.ActivityMainBinding
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var toggle : ActionBarDrawerToggle
     lateinit var binding : ActivityMainBinding
+    lateinit var speechRecognizer : SpeechRecognizer
+    val database = Firebase.database("https://safetyhat-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val ref = database.getReference("SosMessages")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -344,6 +363,105 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("name", name)
             startActivity(intent)
         }
+
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")
+
+        // 마이크 버튼 눌러서 음성인식 시작
+        binding.sosMicBtn.setOnClickListener {
+            binding.sosSendMessage.text = ""
+            // 새 SpeechRecognizer 생성
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
+            speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
+            speechRecognizer.startListening(intent)                         // 듣기 시작
+        }
+
+        binding.sosSendBtn.setOnClickListener {
+            if(binding.sosSendMessage.text.equals("")){
+                Toast.makeText(this, "음성 메시지를 입력하세요", Toast.LENGTH_SHORT).show()
+            }else{
+                val message = SosMessage(MyApplication.prefs.getString("worker_pkey", ""),
+                    MyApplication.prefs.getString("worker_name", ""),
+                    binding.sosSendMessage.text.toString(),
+                    SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()))
+                ref.push().setValue(message)
+
+                binding.sosSendMessage.text = ""
+                binding.sosText.text = "버튼을 누르고 음성인식을 시작하세요"
+                binding.sosSendMessage.isEnabled = false
+
+                Toast.makeText(this, "전송되었습니다", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.mainNotification.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.mainSalary.setOnClickListener {
+            val intent = Intent(this, SalaryActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.mainCalender.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
+
+        /*
+        binding.mainSos.setOnClickListener{
+
+        }
+
+        */
+    }
+
+    // 리스너 설정
+    private val recognitionListener: RecognitionListener = object : RecognitionListener {
+        // 음성 녹음할 준비가 되면 호출
+        override fun onReadyForSpeech(params: Bundle) {
+        }
+        // 말하기 시작했을 때 호출
+        override fun onBeginningOfSpeech() {
+            binding.sosText.text = "잘 듣고 있어요"
+        }
+        // 입력받는 소리의 크기를 알려줌
+        override fun onRmsChanged(rmsdB: Float) {}
+        // 말을 시작하고 인식이 된 단어를 buffer에 담음
+        override fun onBufferReceived(buffer: ByteArray) {}
+        // 말하기를 중지하면 호출
+        override fun onEndOfSpeech() {
+            binding.sosText.text = "아래 내용으로 녹음되었어요. 전송 버튼을 누르세요"
+        }
+        // 오류 발생했을 때 호출
+        override fun onError(error: Int) {
+            val message = when (error) {
+                SpeechRecognizer.ERROR_AUDIO -> "오디오 에러가 발생했습니다"
+                SpeechRecognizer.ERROR_CLIENT -> "클라이언트 에러가 발생했습니다"
+                SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> "권한이 부족합니다"
+                SpeechRecognizer.ERROR_NETWORK -> "네트워크 에러가 발생했습니다"
+                SpeechRecognizer.ERROR_NETWORK_TIMEOUT -> "네트워크 작업 시간이 초과되었습니다"
+                SpeechRecognizer.ERROR_NO_MATCH -> "일치하는 인식 결과가 없습니다"
+                SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> "RecognitionService가 사용 중입니다"
+                SpeechRecognizer.ERROR_SERVER -> "서버가 오류 상태를 보냅니다"
+                SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "음성인식 시간을 초과했습니다"
+                else -> "알 수 없는 에러가 발생했습니다"
+            }
+            binding.sosText.text = "$message"
+        }
+        // 인식 결과가 준비되면 호출
+        override fun onResults(results: Bundle) {
+            // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줌
+            val matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+            // 결과 출력
+            for (i in matches!!.indices) binding.sosSendMessage.text = matches[i]
+        }
+        // 부분 인식 결과를 사용할 수 있을 때 호출
+        override fun onPartialResults(partialResults: Bundle) {}
+        // 향후 이벤트를 추가하기 위해 예약
+        override fun onEvent(eventType: Int, params: Bundle) {}
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
