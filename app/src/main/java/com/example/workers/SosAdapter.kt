@@ -30,7 +30,6 @@ class SosAdapter(val context : Context, val arr : ArrayList<SosMessage>) : Recyc
 
         binding.sosMessageDate.text = SimpleDateFormat("yy/MM/dd").format(timestamp)
         binding.sosMessageTime.text = SimpleDateFormat("a hh:mm").format(timestamp)
-        binding.sosMessageName.text = message.name
         binding.sosMessageContents.text = message.content
     }
 }
