@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item>
-        <shape android:shape="rectangle">
-            <corners
-                android:bottomRightRadius="100dp"
-                android:bottomLeftRadius="100dp"
-                android:topLeftRadius="100dp"
-                android:topRightRadius="100dp"/>
-            <solid android:color="#B8E2DE" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="false" android:state_pressed="false">
+        <shape>
+            <solid android:color="#ECECEC"/>
+            android:width="1dp"/>
+            <corners android:radius="14dp" />
         </shape>
-
     </item>
-
-    <item android:top = "2dp"
-        android:right= "2dp"
-        android:left="2dp"
-        android:bottom="2dp">
-
-        <shape android:shape="rectangle">
-            <solid android:color="#ffffff" />
-            <corners
-                android:bottomRightRadius="100dp"
-                android:bottomLeftRadius="100dp"
-                android:topLeftRadius="100dp"
-                android:topRightRadius="100dp"/>
-        </shape>
-
-    </item>
-
-</layer-list>
+</selector>
