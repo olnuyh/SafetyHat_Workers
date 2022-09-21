@@ -51,7 +51,7 @@
         android:layout_marginTop="5dp"
         android:text="텍스트 입력"
         android:textSize="20sp"
-        android:fontFamily="@font/a12"
+        android:fontFamily="@font/a14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/speakBtn" />

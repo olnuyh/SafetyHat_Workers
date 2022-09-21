@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
+        android:fontFamily="@font/a13"
         android:text="    님의   월 급여"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
