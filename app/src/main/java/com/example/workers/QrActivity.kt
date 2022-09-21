@@ -72,6 +72,10 @@ class QrActivity : AppCompatActivity() {
         if (MyApplication.prefs.getString("worker_status", "").toInt() == 0) { // 출근 등록을 하려는 경우
             binding.qrName.text = "출근 등록"
 
+            binding.goToMainBtn.setOnClickListener {
+                finish()
+            }
+
             binding.loginBtn.setOnClickListener {
                 val integrator = IntentIntegrator(this)
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 여러가지 바코드중에 특정 바코드 설정 가능
@@ -100,10 +104,9 @@ class QrActivity : AppCompatActivity() {
             binding.qrContents.text = "오늘 퇴근이 완료되었습니다"
             binding.loginBtn.isEnabled = false
 
-            binding.goToMainBtn.setOnClickListener {
-                finish()
-            }
         }
+
+
     }
 
         override fun onDestroy() {
