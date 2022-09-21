@@ -1,11 +1,15 @@
 package com.example.workers
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
@@ -16,12 +20,54 @@ import org.json.JSONObject
 
 
 class CalendarActivity : AppCompatActivity() {
+    lateinit var toggle : ActionBarDrawerToggle
+
     private lateinit var binding :ActivityCalendarBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 뷰 바인딩
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolBar)
+
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toggle.syncState()
+
+        binding.mainDrawerView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.menuQr -> {
+                    val intent = Intent(this, QrActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuNotification -> {
+                    val intent = Intent(this, NotificationActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuCalendar -> {
+                    val intent = Intent(this, CalendarActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuSos -> {
+                    val intent = Intent(this, SosActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuSalary -> {
+                    val intent = Intent(this, SalaryActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+
+        binding.logout.setOnClickListener {
+            MyApplication.prefs.clear()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val date = year.toString()+"-"+(month + 1).toString()+"-"+dayOfMonth.toString()
@@ -76,4 +122,26 @@ class CalendarActivity : AppCompatActivity() {
             queue.add(calendaruploadRequest)
         }
      }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)) return true
+
+        return when (item.itemId) {
+            R.id.action_home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.home,menu)
+        return true
+    }
 }

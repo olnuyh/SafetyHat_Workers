@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
@@ -19,11 +22,52 @@ import java.text.SimpleDateFormat
 import kotlin.properties.Delegates
 
 class QrActivity : AppCompatActivity() {
+    lateinit var toggle : ActionBarDrawerToggle
+
     private var builder: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityQrBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolBar)
+
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toggle.syncState()
+
+        binding.mainDrawerView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.menuQr -> {
+                    val intent = Intent(this, QrActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuNotification -> {
+                    val intent = Intent(this, NotificationActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuCalendar -> {
+                    val intent = Intent(this, CalendarActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuSos -> {
+                    val intent = Intent(this, SosActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.menuSalary -> {
+                    val intent = Intent(this, SalaryActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+
+        binding.logout.setOnClickListener {
+            MyApplication.prefs.clear()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         if (MyApplication.prefs.getString("worker_status", "").toInt() == 0) { // 출근 등록을 하려는 경우
             binding.qrName.text = "출근 등록"
@@ -168,4 +212,27 @@ class QrActivity : AppCompatActivity() {
                 super.onActivityResult(requestCode, resultCode, data)
             }
         }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)) return true
+
+        return when (item.itemId) {
+            R.id.action_home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.home,menu)
+        return true
+    }
+
+}

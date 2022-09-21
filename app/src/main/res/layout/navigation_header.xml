@@ -70,7 +70,7 @@
         android:layout_marginStart="209dp"
         android:layout_marginTop="165dp"
         android:background="@null"
-        app:srcCompat="@drawable/navigation_edit" />
+        app:srcCompat="@drawable/navigation_edit"/>
 
     <ImageButton
         android:id="@+id/navigationSaveBtn"
@@ -89,14 +89,5 @@
         android:layout_alignParentBottom="true">
     </View>
 
-    <TextView
-        android:id="@+id/edittext"
-        android:layout_width="50dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="227dp"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="25dp"
-        android:gravity="center"
-        android:text="편집"
-        android:fontFamily="@font/a13"/>
+
 </RelativeLayout>
