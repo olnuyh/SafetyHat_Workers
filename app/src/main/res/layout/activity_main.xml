@@ -308,7 +308,12 @@
                 android:layout_height="wrap_content"
                 android:background="#00ff0000"
                 android:drawableLeft="@drawable/logout_icon"
-                android:text="로그아웃" />
+                android:text="로그아웃"
+                android:fontFamily="@font/a12"
+                android:textStyle="normal"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="5sp"/>
         </LinearLayout>
 
 
