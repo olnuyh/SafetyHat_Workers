@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
@@ -97,18 +98,32 @@ class SalaryActivity : AppCompatActivity() {
             binding.salaryTitle.text = MyApplication.prefs.getString("worker_name", "") + " 님의 " + month_number.toString() + "월 급여"
         }
 
-        binding.upDownBtn.setOnClickListener {
-            if(count == 0){
-                binding.salaryRecyclerView.visibility = View.VISIBLE
-                count = 1
+//        binding.upDownBtn.setOnClickListener {
+//            if(count == 0){
+//                binding.salaryRecyclerView.visibility = View.VISIBLE
+//                count = 1
+//
+//                binding.upDownBtn.setBackgroundResource(R.drawable.notification_up)
+//                binding.salaryRecyclerView.visibility = View.GONE
+//                count = 0
+//
+//                binding.upDownBtn.setBackgroundResource(R.drawable.notification_down)
+//            }
+//        }
 
-                binding.upDownBtn.setBackgroundResource(R.drawable.notification_up)
-                binding.salaryRecyclerView.visibility = View.GONE
-                count = 0
-
-                binding.upDownBtn.setBackgroundResource(R.drawable.notification_down)
-            }
+        binding.downBtn.setOnClickListener {
+            binding.salaryRecyclerView.visibility = View.VISIBLE
+            binding.downBtn.visibility = View.GONE
+            binding.upBtn.visibility = View.VISIBLE
         }
+        binding.upBtn.setOnClickListener {
+            binding.salaryRecyclerView.visibility = View.GONE
+            binding.downBtn.visibility = View.VISIBLE
+            binding.upBtn.visibility = View.GONE
+
+        }
+
+
     }
 
     fun requestSalary(month : String){
@@ -173,5 +188,7 @@ class SalaryActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.home,menu)
         return true
     }
+
+
 
 }
