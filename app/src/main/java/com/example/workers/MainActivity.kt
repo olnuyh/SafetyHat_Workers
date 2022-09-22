@@ -109,6 +109,8 @@ class MainActivity : AppCompatActivity() {
         val savebtn=headerView.findViewById<ImageButton>(R.id.navigationSaveBtn)
         val profileImage=headerView.findViewById<ImageView>(R.id.navigationProfile)
         val xbtn=headerView.findViewById<ImageButton>(R.id.navigationCancel)
+        val edittext=headerView.findViewById<TextView>(R.id.edittext)
+        val savetext=headerView.findViewById<TextView>(R.id.savetext)
 
         var encodeImageString: String? = null
 
@@ -118,9 +120,21 @@ class MainActivity : AppCompatActivity() {
 
         editbtn.setOnClickListener {
             camerabtn.visibility=View.VISIBLE
-            editbtn.visibility=View.GONE
+            editbtn.visibility=View.INVISIBLE
             savebtn.visibility=View.VISIBLE
+            savetext.visibility=View.VISIBLE
+            edittext.visibility=View.INVISIBLE
+
         }
+
+        savebtn.setOnClickListener{
+            camerabtn.visibility=View.GONE
+            editbtn.visibility=View.VISIBLE
+            savebtn.visibility=View.GONE
+            savetext.visibility=View.GONE
+            edittext.visibility=View.VISIBLE
+        }
+
 
         // 갤러리 연동
         val requestGalleryLauncher = registerForActivityResult(
@@ -157,7 +171,9 @@ class MainActivity : AppCompatActivity() {
             dialog.setMessage("선택한 사진으로 프로필을 변경하시겠습니까?")
             dialog.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
                 savebtn.visibility = View.GONE
+                savetext.visibility = View.GONE
                 editbtn.visibility = View.VISIBLE
+                edittext.visibility = View.VISIBLE
                 camerabtn.visibility=View.GONE
 
                 // Volley를 이용한 http 통신
@@ -186,7 +202,9 @@ class MainActivity : AppCompatActivity() {
             })
             dialog.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
                 savebtn.visibility = View.GONE
+                savetext.visibility = View.GONE
                 editbtn.visibility = View.VISIBLE
+                edittext.visibility = View.VISIBLE
                 camerabtn.visibility=View.GONE
 
                 finish()
