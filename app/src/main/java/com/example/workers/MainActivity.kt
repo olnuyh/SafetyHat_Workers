@@ -124,7 +124,6 @@ class MainActivity : AppCompatActivity() {
             savebtn.visibility=View.VISIBLE
             savetext.visibility=View.VISIBLE
             edittext.visibility=View.INVISIBLE
-
         }
 
         savebtn.setOnClickListener{
