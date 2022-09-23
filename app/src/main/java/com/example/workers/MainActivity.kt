@@ -412,6 +412,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.mainSos.setOnClickListener {
+            val intent = Intent(this, SosActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.mainNotification.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)

@@ -121,8 +121,8 @@
 
                 <ImageButton
                     android:id="@+id/downBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/graph_stroke2"
                     android:layout_gravity="center"
                     android:src="@drawable/notification_down" />

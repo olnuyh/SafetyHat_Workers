@@ -22,6 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/mainName"
             android:layout_width="wrap_content"
@@ -292,6 +293,7 @@
             android:text="작업일정표"
             app:layout_constraintStart_toEndOf="@+id/mainNotification"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
