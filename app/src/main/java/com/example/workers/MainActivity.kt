@@ -410,12 +410,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*
-        binding.mainSos.setOnClickListener{
 
+        binding.mainSos.setOnClickListener{
+            val intent = Intent(this, SosActivity::class.java)
+            startActivity(intent)
         }
 
-        */
     }
 
     // 리스너 설정

@@ -83,6 +83,7 @@ class SosActivity : AppCompatActivity() {
                 }
 
                 adapter.notifyDataSetChanged()
+                binding.sosRecyclerView.scrollToPosition(messageList.size - 1)
             }
 
             override fun onCancelled(error: DatabaseError) {
