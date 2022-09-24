@@ -33,8 +33,8 @@ class SignupActivity : AppCompatActivity() {
             if(signupName.equals("")){ // 이름을 입력하지 않은 경우
                 Toast.makeText(this, "이름을 입력하세요.", Toast.LENGTH_SHORT).show()
             }
-            else if(signupId.equals("")){ // 아이디(사원번호)를 입력하지 않은 경우
-                Toast.makeText(this, "아이디(사원번호)를 입력하세요.", Toast.LENGTH_SHORT).show()
+            else if(signupId.equals("")){ // 사원번호를 입력하지 않은 경우
+                Toast.makeText(this, "사원번호를 입력하세요.", Toast.LENGTH_SHORT).show()
             }
             else if(signupPw.equals("")){ // 비밀번호를 입력하지 않은 경우
                 Toast.makeText(this, "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show()

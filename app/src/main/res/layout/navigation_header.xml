@@ -18,11 +18,11 @@
         android:id="@+id/navigationCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/header_x_btn"
         android:layout_marginStart="244.7dp"
         android:layout_marginTop="8.7dp"
         android:background="@null"
-        app:tint="#ffffff"/>
+        app:srcCompat="@drawable/header_x_btn"
+        app:tint="#ffffff" />
 
     <ImageButton
         android:id="@+id/navigationCameraBtn"
