@@ -25,7 +25,7 @@
             android:id="@+id/salaryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="51dp"
             android:fontFamily="@font/a13"
             android:text="    님의   월 급여"
             android:textSize="17sp"
