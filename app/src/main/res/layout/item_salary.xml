@@ -9,23 +9,23 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="33dp"
-        android:background="@drawable/graph_stroke"
         android:text="날짜"
+        android:fontFamily="@font/a12"
         android:gravity="center"/>
     <TextView
         android:id="@+id/itemTime"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="33dp"
-        android:background="@drawable/graph_stroke"
         android:text="근무시간"
+        android:fontFamily="@font/a12"
         android:gravity="center"/>
     <TextView
         android:id="@+id/itemSum"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="33dp"
-        android:background="@drawable/graph_stroke"
         android:text="총 합계"
+        android:fontFamily="@font/a12"
         android:gravity="center"/>
 </LinearLayout>

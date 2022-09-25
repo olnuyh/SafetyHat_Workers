@@ -32,8 +32,10 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.workers.databinding.ActivityMainBinding
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -52,6 +54,8 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        getFCMToken()
 
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
@@ -109,6 +113,8 @@ class MainActivity : AppCompatActivity() {
         val savebtn=headerView.findViewById<ImageButton>(R.id.navigationSaveBtn)
         val profileImage=headerView.findViewById<ImageView>(R.id.navigationProfile)
         val xbtn=headerView.findViewById<ImageButton>(R.id.navigationCancel)
+        val edittext=headerView.findViewById<TextView>(R.id.edittext)
+        val savetext=headerView.findViewById<TextView>(R.id.savetext)
 
         var encodeImageString: String? = null
 
@@ -118,9 +124,21 @@ class MainActivity : AppCompatActivity() {
 
         editbtn.setOnClickListener {
             camerabtn.visibility=View.VISIBLE
-            editbtn.visibility=View.GONE
+            editbtn.visibility=View.INVISIBLE
             savebtn.visibility=View.VISIBLE
+            savetext.visibility=View.VISIBLE
+            edittext.visibility=View.INVISIBLE
+
         }
+
+        savebtn.setOnClickListener{
+            camerabtn.visibility=View.GONE
+            editbtn.visibility=View.VISIBLE
+            savebtn.visibility=View.GONE
+            savetext.visibility=View.GONE
+            edittext.visibility=View.VISIBLE
+        }
+
 
         // 갤러리 연동
         val requestGalleryLauncher = registerForActivityResult(
@@ -157,7 +175,9 @@ class MainActivity : AppCompatActivity() {
             dialog.setMessage("선택한 사진으로 프로필을 변경하시겠습니까?")
             dialog.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
                 savebtn.visibility = View.GONE
+                savetext.visibility = View.GONE
                 editbtn.visibility = View.VISIBLE
+                edittext.visibility = View.VISIBLE
                 camerabtn.visibility=View.GONE
 
                 // Volley를 이용한 http 통신
@@ -186,7 +206,9 @@ class MainActivity : AppCompatActivity() {
             })
             dialog.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
                 savebtn.visibility = View.GONE
+                savetext.visibility = View.GONE
                 editbtn.visibility = View.VISIBLE
+                edittext.visibility = View.VISIBLE
                 camerabtn.visibility=View.GONE
 
                 finish()
@@ -485,5 +507,23 @@ class MainActivity : AppCompatActivity() {
             bm = Bitmap.createScaledBitmap(bm!!, 160, 96, true)
         }
         return bm
+    }
+
+    private fun getFCMToken(): String?{
+        var token: String? = null
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                //Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            token = task.result
+
+            // Log and toast
+            Log.d("mobileApp", "FCM Token is ${token}")
+        })
+
+        return token
     }
 }

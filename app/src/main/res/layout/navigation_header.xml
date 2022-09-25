@@ -38,48 +38,48 @@
         android:id="@+id/navigationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="144dp"
         android:fontFamily="@font/a14"
         android:hint="이름"
-        android:textStyle="normal"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="4sp"
-        android:layout_marginTop="144dp"
-        android:layout_marginStart="25dp"/>
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/navigationEmplId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="173dp"
         android:layout_marginStart="25dp"
-        android:textStyle="normal"
-        android:textSize="16sp"
-        android:textColor="#ffffff"
+        android:layout_marginTop="173dp"
+        android:fontFamily="@font/a12"
+        android:hint="사원번호"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="8sp"
-        android:fontFamily="@font/a12"
-        android:hint="사원번호" />
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="normal" />
 
 
     <ImageButton
         android:id="@+id/navigationEditBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="209dp"
+        android:layout_marginStart="180dp"
         android:layout_marginTop="165dp"
-        android:background="@null"
-        app:srcCompat="@drawable/navigation_edit" />
+        app:srcCompat="@drawable/edit_btn"
+        android:background="@null" />
 
     <ImageButton
         android:id="@+id/navigationSaveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="209dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="165dp"
         android:background="@null"
-        app:srcCompat="@drawable/navigation_save"
+        app:srcCompat="@drawable/save_btn"
         android:visibility="gone" />
 
     <View
@@ -93,9 +93,26 @@
         android:id="@+id/edittext"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:gravity="center"
-        android:layout_marginStart="227dp"
+        android:layout_alignStart="@+id/navigationEditBtn"
+        android:layout_marginStart="17dp"
         android:layout_marginTop="168dp"
         android:layout_marginEnd="25dp"
-        android:text="편집" />
+        android:fontFamily="@font/a13"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="편집"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/savetext"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_alignStart="@+id/navigationSaveBtn"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="173dp"
+        android:fontFamily="@font/a13"
+        android:text="저장"
+        android:textSize="12sp"
+        android:visibility="visible"/>
+
 </RelativeLayout>
