@@ -90,7 +90,7 @@ class CalendarActivity : AppCompatActivity() {
                         for (i in 0 until array.length()) {
                             val textView = TextView(this)
                             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                            layoutParams.setMargins(100, 40, 0, 0)
+                            layoutParams.setMargins(120, 40, 0, 0)
                             textView.layoutParams = layoutParams
                             textView.text = array.getJSONObject(i).getString("calendar_contents")
                             binding.scheduleLayout.addView(textView)
@@ -98,7 +98,7 @@ class CalendarActivity : AppCompatActivity() {
                             val drawable = resources.getDrawable(R.drawable.calendar_point)
                             val imageView= ImageView(this)
                             val layoutParams2 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                            layoutParams2.setMargins(5, -45, 0, 0)
+                            layoutParams2.setMargins(25, -45, 0, 0)
                             imageView.layoutParams = layoutParams2
                             imageView.setImageDrawable(drawable)
                             binding.scheduleLayout.addView(imageView)

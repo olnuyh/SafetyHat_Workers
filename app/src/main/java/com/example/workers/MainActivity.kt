@@ -128,7 +128,6 @@ class MainActivity : AppCompatActivity() {
             savebtn.visibility=View.VISIBLE
             savetext.visibility=View.VISIBLE
             edittext.visibility=View.INVISIBLE
-
         }
 
         savebtn.setOnClickListener{
@@ -415,6 +414,11 @@ class MainActivity : AppCompatActivity() {
 
                 Toast.makeText(this, "전송되었습니다", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.mainSos.setOnClickListener {
+            val intent = Intent(this, SosActivity::class.java)
+            startActivity(intent)
         }
 
         binding.mainNotification.setOnClickListener {
