@@ -2,13 +2,11 @@ package com.example.workers
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -35,7 +33,7 @@ class CalendarActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toggle.syncState()
 
-        binding.mainDrawerView.setNavigationItemSelectedListener {
+        binding.calendarDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menuQr -> {
                     val intent = Intent(this, QrActivity::class.java)
@@ -68,6 +66,13 @@ class CalendarActivity : AppCompatActivity() {
             finish()
         }
 
+        val headerView = binding.calendarDrawerView.getHeaderView(0)
+        headerView.findViewById<ImageButton>(R.id.navigationCancel).setOnClickListener {
+            binding.drawerLayout.closeDrawer(Gravity.LEFT)
+        }
+
+        headerView.findViewById<TextView>(R.id.navigationName).text = MyApplication.prefs.getString("worker_name", "")
+        headerView.findViewById<TextView>(R.id.navigationEmplId).text = MyApplication.prefs.getString("worker_id", "")
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val date = year.toString()+"-"+(month + 1).toString()+"-"+dayOfMonth.toString()
@@ -90,15 +95,16 @@ class CalendarActivity : AppCompatActivity() {
                         for (i in 0 until array.length()) {
                             val textView = TextView(this)
                             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                            layoutParams.setMargins(180, 40, 0, 0)
+                            layoutParams.setMargins(130, 40, 0, 0)
                             textView.layoutParams = layoutParams
                             textView.text = array.getJSONObject(i).getString("calendar_contents")
+                            textView.setTextAppearance(R.style.calendar_text)
                             binding.scheduleLayout.addView(textView)
 
                             val drawable = resources.getDrawable(R.drawable.calendar_point)
                             val imageView= ImageView(this)
                             val layoutParams2 = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                            layoutParams2.setMargins(70, -45, 0, 0)
+                            layoutParams2.setMargins(50, -40, 0, 0)
                             imageView.layoutParams = layoutParams2
                             imageView.setImageDrawable(drawable)
                             binding.scheduleLayout.addView(imageView)

@@ -17,4 +17,8 @@
     <style name="navigation_item_font" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/a12</item>
     </style>
+
+    <style name="calendar_text" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/a12</item>
+    </style>
 </resources>
