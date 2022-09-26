@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
         else if(auto_loginId.equals("") && auto_loginPw.equals("")){
+
             binding.loginbtn.setOnClickListener {
                 val loginId = binding.loginId.text.toString() // 사용자가 입력한 ID(사원번호)
                 val loginPw = binding.loginPw.text.toString() // 사용자가 입력한 비밀번호
