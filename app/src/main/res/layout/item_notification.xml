@@ -8,6 +8,8 @@
         android:id="@+id/cl_item_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@id/cl_item_expand"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,6 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="제목"
             android:fontFamily="@font/a13"/>
+
 
         <ImageView
             android:id="@+id/iv_item_down_img"
@@ -62,41 +65,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_item_default">
 
-        <!--        <View-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:background="@drawable/notification_292"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
-        <!--        </View>-->
+        <View
+            android:layout_width="335dp"
+            android:layout_height="1dp"
+            android:background="@drawable/calendar_line"
+            android:backgroundTint="#E7E7E7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
 
         <TextView
             android:id="@+id/itemContent"
-            android:layout_width="288dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24.5dp"
+            android:fontFamily="@font/a12"
+            android:textColor="#de000000"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="29dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24.5dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/itemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/itemContent"
             android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toStartOf="@+id/itemDate"
             android:layout_marginEnd="15dp"
-            />
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/a12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/itemDate"
+            app:layout_constraintTop_toBottomOf="@+id/itemContent" />
 
         <TextView
             android:id="@+id/itemDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="28dp"
-            app:layout_constraintTop_toBottomOf="@+id/itemContent"
             android:layout_marginTop="30dp"
-            />
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/a12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemContent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
