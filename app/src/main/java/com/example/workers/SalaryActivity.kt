@@ -4,10 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -38,7 +41,7 @@ class SalaryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toggle.syncState()
 
-        binding.mainDrawerView.setNavigationItemSelectedListener {
+        binding.salaryDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menuQr -> {
                     val intent = Intent(this, QrActivity::class.java)
@@ -63,6 +66,14 @@ class SalaryActivity : AppCompatActivity() {
             }
             true
         }
+
+        val headerView = binding.salaryDrawerView.getHeaderView(0)
+        headerView.findViewById<ImageButton>(R.id.navigationCancel).setOnClickListener {
+            binding.drawerLayout.closeDrawer(Gravity.LEFT)
+        }
+
+        headerView.findViewById<TextView>(R.id.navigationName).text = MyApplication.prefs.getString("worker_name", "")
+        headerView.findViewById<TextView>(R.id.navigationEmplId).text = MyApplication.prefs.getString("worker_id", "")
 
         binding.logout.setOnClickListener {
             MyApplication.prefs.clear()

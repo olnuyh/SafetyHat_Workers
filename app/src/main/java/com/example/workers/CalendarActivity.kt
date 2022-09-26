@@ -1,12 +1,14 @@
 package com.example.workers
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -78,7 +80,8 @@ class CalendarActivity : AppCompatActivity() {
             val date = year.toString()+"-"+(month + 1).toString()+"-"+dayOfMonth.toString()
 
             // Volley를 이용한 http 통신
-            val calendaruploadRequest = object : StringRequest(
+            val calendaruploadRequest = @RequiresApi(Build.VERSION_CODES.M)
+            object : StringRequest(
                 Request.Method.POST,
                 BuildConfig.API_KEY + "read_calendar.php",
                 Response.Listener<String>{ response ->
