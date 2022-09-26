@@ -1,12 +1,12 @@
 package com.example.workers
 
 import android.Manifest
+import android.R.attr
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.*
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -17,7 +17,10 @@ import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -40,7 +43,6 @@ import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.properties.Delegates
 
 
@@ -149,14 +151,18 @@ class MainActivity : AppCompatActivity() {
                 inputStream!!.close()
                 inputStream = null
 
-                val resizedBitmap = resize(bitmap)
-                profileImage.setImageBitmap(resizedBitmap)
+                //val resizedBitmap = resize(bitmap)
+                //profileImage.setImageBitmap(resizedBitmap)
+
+                val bp= getCroppedBitmap(bitmap)
+                profileImage.setImageBitmap(bp)
 
                 //DB에 저장할 형태로 변경
                 val byteArrayOutputStream = ByteArrayOutputStream()
-                resizedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+                bp!!.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
                 val bytesOfImage: ByteArray = byteArrayOutputStream.toByteArray()
                 encodeImageString = Base64.encodeToString(bytesOfImage, Base64.DEFAULT)
+
             }catch (e : Exception){
                 e.printStackTrace()
             }
@@ -300,7 +306,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //날씨
-       val weatherRequest= object : StringRequest(
+        val weatherRequest= object : StringRequest(
             Method.GET, BuildConfig.WEATHER_API_KEY,
             Response.Listener<String>{ response ->
                 val jsonObject = JSONObject(response)
@@ -529,5 +535,31 @@ class MainActivity : AppCompatActivity() {
         })
 
         return token
+    }
+
+    fun getCroppedBitmap(bitmap: Bitmap): Bitmap? {
+        val output = Bitmap.createBitmap(
+            bitmap.width,
+            bitmap.height, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(output)
+        val color = -0xbdbdbe
+        val paint = Paint()
+        val rect = Rect(0, 0, bitmap.width, bitmap.height)
+        paint.isAntiAlias = true
+        canvas.drawARGB(0, 0, 0, 0)
+        paint.color = color
+        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        canvas.drawCircle(
+            (bitmap.width / 2).toFloat(), (bitmap.height / 2).toFloat(),
+            (bitmap.width / 2).toFloat(), paint
+        )
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        canvas.drawBitmap(bitmap, rect, rect, paint)
+
+        val bmp = Bitmap.createScaledBitmap(output, 210, 210, false)
+        return bmp
+
+       //return output
     }
 }
