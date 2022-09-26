@@ -304,7 +304,7 @@
         app:menu="@menu/navigation_menu"
         app:itemIconTint="#7e84a3"
         app:itemTextColor="#99000000"
-        app:itemTextAppearance="@font/robotomedium">
+        app:itemTextAppearance="@style/navigation_item_font">
 
         <LinearLayout
             android:layout_width="match_parent"

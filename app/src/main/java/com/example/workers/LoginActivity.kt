@@ -23,14 +23,14 @@ class LoginActivity : AppCompatActivity() {
         val auto_loginId = MyApplication.prefs.getString("worker_id", "")
         val auto_loginPw = MyApplication.prefs.getString("worker_pw", "")
 
-        if(!auto_loginId.equals("") && !auto_loginPw.equals("")){ // 자동 로그인
-            Toast.makeText(this, "자동 로그인 성공하였습니다.", Toast.LENGTH_LONG).show()
-            finish()
+       // if(!auto_loginId.equals("") && !auto_loginPw.equals("")){ // 자동 로그인
+            //Toast.makeText(this, "자동 로그인 성공하였습니다.", Toast.LENGTH_LONG).show()
+            //finish()
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        else if(auto_loginId.equals("") && auto_loginPw.equals("")){
+           // val intent = Intent(this, MainActivity::class.java)
+            //startActivity(intent)
+       //}
+       // else if(auto_loginId.equals("") && auto_loginPw.equals("")){
 
             binding.loginbtn.setOnClickListener {
                 val loginId = binding.loginId.text.toString() // 사용자가 입력한 ID(사원번호)
@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
                     queue.add(loginRequest)
                 }
             }
-        }
+        //}
 
         binding.findBtn.setOnClickListener {
             val intent = Intent(this, PasswordActivity::class.java)
