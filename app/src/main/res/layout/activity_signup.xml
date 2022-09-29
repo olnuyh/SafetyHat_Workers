@@ -215,7 +215,7 @@
         android:textColor="#666666"
         android:textSize="18sp"
         android:textStyle="normal"
-        android:fontFamily="@font/a14"
+        android:fontFamily="@font/a13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="로그인" />
@@ -225,7 +225,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="635dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/a14"
+        android:fontFamily="@font/a13"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="2sp"
         android:text="가입하기"

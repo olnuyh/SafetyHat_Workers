@@ -78,6 +78,8 @@
             android:layout_marginTop="25dp"
             android:background="@drawable/btn_corner"
             android:text="닫기"
+            android:textSize="17sp"
+            android:fontFamily="@font/a13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frameLayout" />

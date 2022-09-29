@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a13"/>
 
         <TextView
             android:id="@+id/mainArea"
@@ -53,7 +53,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a13"/>
 
         <TextView
             android:id="@+id/mainDate"
@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a13"/>
 
         <ImageButton
             android:id="@+id/workBtn"
@@ -139,7 +139,7 @@
             android:lineSpacingExtra="7sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a13"/>
 
         <TextView
             android:id="@+id/cityView"
@@ -152,7 +152,7 @@
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/tempView"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a13"/>
 
         <TextView
             android:id="@+id/tempView"
@@ -160,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="140dp"
             android:layout_marginTop="550dp"
-            android:fontFamily="@font/nanumsquarer"
+            android:fontFamily="@font/a13"
             android:textSize="17sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +188,7 @@
             android:lineSpacingExtra="7sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a13"/>
 
         <ImageButton
             android:id="@+id/sosMicBtn"
@@ -218,7 +218,7 @@
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a12"/>
 
         <ImageButton
             android:id="@+id/sosSendBtn"
@@ -244,7 +244,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:fontFamily="@font/nanumsquarer"/>
+            android:fontFamily="@font/a12"/>
 
         <ImageButton
             android:id="@+id/mainSos"
