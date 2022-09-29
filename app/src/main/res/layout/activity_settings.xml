@@ -27,7 +27,7 @@
         android:layout_width="335dp"
         android:layout_height="2dp"
         android:layout_marginTop="160dp"
-        android:background="@drawable/calender_line"
+        android:background="@drawable/calendar_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></View>

@@ -253,8 +253,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="620dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/sosmain_btn"
-            android:text="공지사항"
+            android:src="@drawable/main_sos"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -262,24 +261,11 @@
             android:id="@+id/mainNotification"
             android:layout_width="85dp"
             android:layout_height="90dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="620dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/notification_btn"
-            android:text="공지사항"
+            android:src="@drawable/main_notification"
             app:layout_constraintStart_toEndOf="@+id/mainSos"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/mainSalary"
-            android:layout_width="85dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="620dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/salary_btn"
-            android:text="급여내역"
-            app:layout_constraintStart_toEndOf="@+id/mainCalender"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -289,9 +275,21 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="620dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/calender_btn"
+            android:src="@drawable/main_calendar"
             android:text="작업일정표"
             app:layout_constraintStart_toEndOf="@+id/mainNotification"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/mainSalary"
+            android:layout_width="85dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="620dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_salary"
+            android:text="급여내역"
+            app:layout_constraintStart_toEndOf="@+id/mainCalender"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -306,7 +304,7 @@
         app:menu="@menu/navigation_menu"
         app:itemIconTint="#7e84a3"
         app:itemTextColor="#99000000"
-        app:itemTextAppearance="@font/robotomedium">
+        app:itemTextAppearance="@style/navigation_item_font">
 
         <LinearLayout
             android:layout_width="match_parent"

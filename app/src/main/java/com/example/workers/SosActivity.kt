@@ -9,8 +9,11 @@ import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -46,7 +49,7 @@ class SosActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toggle.syncState()
 
-        binding.mainDrawerView.setNavigationItemSelectedListener {
+        binding.sosDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menuQr -> {
                     val intent = Intent(this, QrActivity::class.java)
@@ -71,6 +74,14 @@ class SosActivity : AppCompatActivity() {
             }
             true
         }
+
+        val headerView = binding.sosDrawerView.getHeaderView(0)
+        headerView.findViewById<ImageButton>(R.id.navigationCancel).setOnClickListener {
+            binding.drawerLayout.closeDrawer(Gravity.LEFT)
+        }
+
+        headerView.findViewById<TextView>(R.id.navigationName).text = MyApplication.prefs.getString("worker_name", "")
+        headerView.findViewById<TextView>(R.id.navigationEmplId).text = MyApplication.prefs.getString("worker_id", "")
 
         binding.logout.setOnClickListener {
             MyApplication.prefs.clear()
@@ -126,6 +137,7 @@ class SosActivity : AppCompatActivity() {
                 }
 
                 adapter.notifyDataSetChanged()
+                binding.sosRecyclerView.scrollToPosition(messageList.size - 1)
             }
 
             override fun onCancelled(error: DatabaseError) {

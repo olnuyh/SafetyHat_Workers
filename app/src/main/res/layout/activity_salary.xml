@@ -25,7 +25,7 @@
             android:id="@+id/salaryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="51dp"
             android:fontFamily="@font/a13"
             android:text="    님의   월 급여"
             android:textSize="17sp"
@@ -73,6 +73,7 @@
                 android:layout_height="33dp"
                 android:layout_weight="1"
                 android:background="@drawable/graph_stroke"
+                android:fontFamily="@font/a12"
                 android:gravity="center" />
 
             <TextView
@@ -81,6 +82,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/graph_stroke"
                 android:gravity="center"
+                android:fontFamily="@font/a12"
                 android:text="근무시간" />
 
             <TextView
@@ -89,6 +91,7 @@
                 android:layout_weight="2"
                 android:background="@drawable/graph_stroke"
                 android:gravity="center"
+                android:fontFamily="@font/a12"
                 android:text="총 합계" />
         </LinearLayout>
 
@@ -175,13 +178,13 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/main_drawer_view"
+        android:id="@+id/salary_drawer_view"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
         app:itemIconTint="#7e84a3"
         app:itemTextColor="#99000000"
-        app:itemTextAppearance="@font/robotomedium">
+        app:itemTextAppearance="@style/navigation_item_font">
 
         <LinearLayout
             android:layout_width="match_parent"

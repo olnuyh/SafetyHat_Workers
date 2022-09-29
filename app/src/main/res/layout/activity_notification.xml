@@ -42,7 +42,7 @@
             android:layout_width="335dp"
             android:layout_height="2dp"
             android:layout_marginTop="11.5dp"
-            android:background="@drawable/calender_line"
+            android:background="@drawable/calendar_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notification"></View>
@@ -66,13 +66,13 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/main_drawer_view"
+        android:id="@+id/notification_drawer_view"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
         app:itemIconTint="#7e84a3"
         app:itemTextColor="#99000000"
-        app:itemTextAppearance="@font/robotomedium">
+        app:itemTextAppearance="@style/navigation_item_font">
 
         <LinearLayout
             android:layout_width="match_parent"
