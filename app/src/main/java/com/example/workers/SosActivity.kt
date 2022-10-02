@@ -1,24 +1,23 @@
 package com.example.workers
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.workers.databinding.ActivitySosBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,6 +26,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class SosActivity : AppCompatActivity() {
     lateinit var toggle : ActionBarDrawerToggle
@@ -48,6 +48,7 @@ class SosActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toggle.syncState()
+
 
         binding.sosDrawerView.setNavigationItemSelectedListener {
             when(it.itemId){
@@ -120,9 +121,30 @@ class SosActivity : AppCompatActivity() {
                 SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()))
             ref.push().setValue(message)
 
+            val content = MyApplication.prefs.getString("worker_name", "") + ": " + binding.recordedContents.text.toString()
+
             binding.recordedContents.text = ""
             binding.explanationContents.text = "버튼을 누르고 음성인식을 시작하세요"
             binding.saveContentsBtn.isEnabled = false
+
+            // Volley를 이용한 http 통신
+            val sosRequest = object : StringRequest(
+                Request.Method.POST,
+                BuildConfig.API_KEY + "send_sosnotification.php",
+                Response.Listener<String>{ response ->
+
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+                }){
+                override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
+                    val params : MutableMap<String, String> = HashMap()
+                    params["content"] = content
+                    return params
+                }
+            }
+            val queue = Volley.newRequestQueue(this)
+            queue.add(sosRequest)
         }
 
         ref.addValueEventListener(object : ValueEventListener{

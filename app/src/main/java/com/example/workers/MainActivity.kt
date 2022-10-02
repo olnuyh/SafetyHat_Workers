@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getFCMToken()
+        //getFCMToken()
 
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
@@ -414,11 +414,34 @@ class MainActivity : AppCompatActivity() {
                     SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()))
                 ref.push().setValue(message)
 
+                val content = MyApplication.prefs.getString("worker_name", "") + ": " + binding.sosSendMessage.text.toString()
+
                 binding.sosSendMessage.text = ""
                 binding.sosText.text = "버튼을 누르고 음성인식을 시작하세요"
                 binding.sosSendMessage.isEnabled = false
 
+
+                // Volley를 이용한 http 통신
+                val sosRequest = object : StringRequest(
+                    Request.Method.POST,
+                    BuildConfig.API_KEY + "send_sosnotification.php",
+                    Response.Listener<String>{ response ->
+
+                    },
+                    Response.ErrorListener { error ->
+                        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+                    }){
+                    override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
+                        val params : MutableMap<String, String> = HashMap()
+                        params["content"] = content
+                        return params
+                    }
+                }
+                val queue = Volley.newRequestQueue(this)
+                queue.add(sosRequest)
+
                 Toast.makeText(this, "전송되었습니다", Toast.LENGTH_SHORT).show()
+
             }
         }
 
