@@ -254,9 +254,13 @@ class MainActivity : AppCompatActivity() {
                 navEmplId.text = MyApplication.prefs.getString("worker_id", "")
 
                 if(worker.getString("area").equals("")){
-                    binding.mainName.text = ""
-                    binding.mainArea.text = name + " 님은 " + today
+//                    binding.mainName.text = ""
+//                    binding.mainArea.text = name + " 님은 " + today
+//                    binding.mainDate.text = "등록된 작업 일정이 없습니다"
+                    binding.mainName.text = name + " 님은 "
+                    binding.mainArea.text = today
                     binding.mainDate.text = "등록된 작업 일정이 없습니다"
+
                 }
                 else{
                     val start_time = SimpleDateFormat("H:mm").format(SimpleDateFormat("H:mm").parse(worker.getString("start")))
@@ -565,6 +569,7 @@ class MainActivity : AppCompatActivity() {
             bitmap.width,
             bitmap.height, Bitmap.Config.ARGB_8888
         )
+
         val canvas = Canvas(output)
         val color = -0xbdbdbe
         val paint = Paint()
@@ -580,9 +585,11 @@ class MainActivity : AppCompatActivity() {
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
         canvas.drawBitmap(bitmap, rect, rect, paint)
 
-        val bmp = Bitmap.createScaledBitmap(output, 210, 210, false)
+        val bmp = Bitmap.createScaledBitmap(output, 210, 210, true)
         return bmp
 
        //return output
+
+
     }
 }

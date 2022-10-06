@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_width="330dp"
+    android:layout_width="match_parent"
     android:layout_height="33dp"
-    android:layout_marginStart="34dp"
     android:layout_gravity="center_horizontal"
     >
     <TextView
@@ -25,7 +24,7 @@
     <TextView
         android:id="@+id/itemSum"
         android:layout_width="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:layout_height="33dp"
         android:text="총 합계"
         android:fontFamily="@font/a12"

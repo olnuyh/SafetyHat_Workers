@@ -1,16 +1,19 @@
 package com.example.workers
 
+import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -19,7 +22,6 @@ import com.example.workers.databinding.ActivityQrBinding
 import com.example.workers.databinding.DialogQrBinding
 import com.google.zxing.integration.android.IntentIntegrator
 import java.text.SimpleDateFormat
-import kotlin.properties.Delegates
 
 class QrActivity : AppCompatActivity() {
     lateinit var toggle : ActionBarDrawerToggle
@@ -99,10 +101,17 @@ class QrActivity : AppCompatActivity() {
                 integrator.setBarcodeImageEnabled(false) // 스캔 했을 때 스캔한 이미지 사용여부
                 integrator.initiateScan() // 스캔
             }
+            binding.goToMainBtn.setOnClickListener {
+                finish()
+            }
         } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 2) { // 퇴근이 끝난 경우
             binding.qrName.text = "퇴근 완료"
             binding.qrContents.text = "오늘 퇴근이 완료되었습니다"
             binding.loginBtn.isEnabled = false
+
+            binding.goToMainBtn.setOnClickListener {
+                finish()
+            }
 
         }
 
@@ -136,24 +145,32 @@ class QrActivity : AppCompatActivity() {
                                     Toast.makeText(this, "이미 사용중인 안전모입니다.", Toast.LENGTH_LONG)
                                         .show()
                                 } else { // QR 인증 성공 + 안전모 등록 성공
-                                    val dialog = DialogQrBinding.inflate(layoutInflater)
-                                    dialog.dialogName.text = MyApplication.prefs.getString("worker_name", "")
-                                    dialog.dialogEmplId.text =
+                                    val dialog = Dialog(this)
+                                    dialog.setContentView(R.layout.dialog_qr)
+                                    dialog.setCanceledOnTouchOutside(true)
+                                    dialog.setCancelable(false)
+                                    dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                                    val dialogName = dialog.findViewById<TextView>(R.id.dialogName)
+                                    val dialogEmplId = dialog.findViewById<TextView>(R.id.dialogEmplId)
+                                    val dialogContents = dialog.findViewById<TextView>(R.id.dialogContents)
+                                    val dialogOkBtn = dialog.findViewById<Button>(R.id.dialogOkBtn)
+
+                                    dialogName.text = MyApplication.prefs.getString("worker_name", "")
+                                    dialogEmplId.text =
                                         MyApplication.prefs.getString("worker_id", "")
                                     val input =
                                         SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
-                                    dialog.dialogContents.text =
+                                    dialogContents.text =
                                         SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat(
                                             "a HH:mm"
                                         ).format(input) + " 출근을 등록합니다"
-                                    dialog.dialogOkBtn.setOnClickListener {
+                                    dialogOkBtn.setOnClickListener {
                                         finish()
                                         val intent = Intent(this, MainActivity::class.java)
                                         startActivity(intent)
                                     }
-                                    builder = AlertDialog.Builder(this)
-                                        .setView(dialog.root)
-                                        .show()
+                                    dialog.show()
                                 }
                             },
                             Response.ErrorListener { error ->
@@ -178,22 +195,30 @@ class QrActivity : AppCompatActivity() {
                                     Toast.makeText(this, "현재 사용중인 안전모가 아닙니다.", Toast.LENGTH_LONG)
                                         .show()
                                 } else { // QR 인증 성공 + 안전모 등록 성공
-                                    val dialog = DialogQrBinding.inflate(layoutInflater)
-                                    dialog.dialogName.text = MyApplication.prefs.getString("worker_name", "")
-                                    dialog.dialogEmplId.text =
+
+                                    val dialog = Dialog(this)
+                                    dialog.setContentView(R.layout.dialog_qr)
+                                    dialog.setCanceledOnTouchOutside(true)
+                                    dialog.setCancelable(false)
+                                    dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                                    val dialogName = dialog.findViewById<TextView>(R.id.dialogName)
+                                    val dialogEmplId = dialog.findViewById<TextView>(R.id.dialogEmplId)
+                                    val dialogContents = dialog.findViewById<TextView>(R.id.dialogContents)
+                                    val dialogOkBtn = dialog.findViewById<Button>(R.id.dialogOkBtn)
+
+                                    dialogName.text = MyApplication.prefs.getString("worker_name", "")
+                                    dialogEmplId.text =
                                         MyApplication.prefs.getString("worker_id", "")
                                     val input = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
-                                    dialog.dialogContents.text = SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat("a HH:mm").format(input) + " 퇴근을 등록합니다"
-                                    dialog.dialogOkBtn.setOnClickListener {
+                                    dialogContents.text = SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat("a HH:mm").format(input) + " 퇴근을 등록합니다"
+                                    dialogOkBtn.setOnClickListener {
                                         finish()
                                         val intent = Intent(this, MainActivity::class.java)
                                         startActivity(intent)
                                     }
-                                    builder = AlertDialog.Builder(this)
-                                        .setView(dialog.root)
-                                        .show()
+                                    dialog.show()
                                 }
-
                             },
                             Response.ErrorListener { error ->
                                 Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
