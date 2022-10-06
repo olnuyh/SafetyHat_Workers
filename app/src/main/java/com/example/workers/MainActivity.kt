@@ -2,6 +2,7 @@ package com.example.workers
 
 import android.Manifest
 import android.R.attr
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,6 +14,9 @@ import android.provider.MediaStore
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
@@ -238,7 +242,8 @@ class MainActivity : AppCompatActivity() {
         binding.leaveBtn.isEnabled = false
 
         // 근무자 정보 불러오기(이름, 사번, 예정 근무 내역, 예정 근무 구역, 예정 근무 시간, 프로필)
-        val mainRequest = object : StringRequest(
+        val mainRequest = @SuppressLint("ResourceAsColor")
+        object : StringRequest(
             Request.Method.POST,
             BuildConfig.API_KEY + "read_information.php",
             Response.Listener<String>{ response ->
@@ -269,6 +274,19 @@ class MainActivity : AppCompatActivity() {
                     binding.mainName.text = name + " 님은 " + today
                     binding.mainArea.text = worker.getString("area") + "구역에서 "
                     binding.mainDate.text = start_time + " ~ " + end_time +"까지 근무입니다"
+
+                    var textView:TextView = findViewById(R.id.mainArea)
+                    val textData: String = textView.text.toString()
+                    val builder = SpannableStringBuilder(textData)
+                    val colorBlueSpan = ForegroundColorSpan(Color.rgb(62,79,135))
+                    builder.setSpan(colorBlueSpan, 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    textView.text = builder
+
+                    var textView2:TextView = findViewById(R.id.mainDate)
+                    val textData2: String = textView2.text.toString()
+                    val builder2 = SpannableStringBuilder(textData2)
+                    builder2.setSpan(colorBlueSpan, 0, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    textView2.text = builder2
 
                     status = worker.getString("status").toInt()
                     MyApplication.prefs.setString("worker_status", worker.getString("status"))
