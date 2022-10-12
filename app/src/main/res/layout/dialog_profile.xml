@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="287dp"
+    android:layout_height="215dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:background="@drawable/login_corner">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="#de000000"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="6sp"
+        android:gravity="center_horizontal"
+        android:text="프로필 사진 변경"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/a14"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="17sp"
+        android:textColor="#de000000"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="9sp"
+        android:text="선택한 사진으로 프로필을"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="76dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/a12"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="17sp"
+        android:textColor="#de000000"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="9sp"
+        android:text="변경하시겠습니까?"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="109dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/a12"/>
+
+    <ImageButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/profile_btn_base"
+        android:background="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="31dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        android:textStyle="normal"
+        android:textSize="15sp"
+        android:textColor="#3c3c3c"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="5sp"
+        android:fontFamily="@font/a14"
+        app:layout_constraintBottom_toBottomOf="@+id/cancelButton"
+        app:layout_constraintEnd_toEndOf="@+id/cancelButton"
+        app:layout_constraintStart_toStartOf="@+id/cancelButton"
+        app:layout_constraintTop_toTopOf="@+id/cancelButton" />
+
+    <ImageButton
+        android:id="@+id/okButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/profile_btn_base"
+        android:background="#ffffff"
+        android:layout_marginEnd="31dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textStyle="normal"
+        android:textSize="15sp"
+        android:textColor="#3c3c3c"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="5sp"
+        android:fontFamily="@font/a14"
+        app:layout_constraintBottom_toBottomOf="@+id/okButton"
+        app:layout_constraintEnd_toEndOf="@+id/okButton"
+        app:layout_constraintStart_toStartOf="@+id/okButton"
+        app:layout_constraintTop_toTopOf="@+id/okButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

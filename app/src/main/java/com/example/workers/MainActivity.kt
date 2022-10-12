@@ -3,11 +3,13 @@ package com.example.workers
 import android.Manifest
 import android.R.attr
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.*
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -49,6 +51,7 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -180,10 +183,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         savebtn.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("프로필 변경")
-            dialog.setMessage("선택한 사진으로 프로필을 변경하시겠습니까?")
-            dialog.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.dialog_profile)
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.setCancelable(true)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            val cancelButton = dialog.findViewById<ImageButton>(R.id.cancelButton)
+            val okButton = dialog.findViewById<ImageButton>(R.id.okButton)
+
+            okButton.setOnClickListener {
                 savebtn.visibility = View.GONE
                 savetext.visibility = View.GONE
                 editbtn.visibility = View.VISIBLE
@@ -213,8 +222,9 @@ class MainActivity : AppCompatActivity() {
                 finish()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            })
-            dialog.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
+            }
+
+            cancelButton.setOnClickListener {
                 savebtn.visibility = View.GONE
                 savetext.visibility = View.GONE
                 editbtn.visibility = View.VISIBLE
@@ -224,7 +234,9 @@ class MainActivity : AppCompatActivity() {
                 finish()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            })
+            }
+
+
 //            dialog.setNeutralButton("사진 다시 선택", DialogInterface.OnClickListener { dialog, which ->
 //                savebtn.visibility = View.VISIBLE
 //                editbtn.visibility = View.GONE
