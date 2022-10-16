@@ -132,7 +132,14 @@ class MainActivity : AppCompatActivity() {
             savetext.visibility=View.INVISIBLE
             edittext.visibility=View.VISIBLE
 
-            profileImage.setImageResource(R.drawable.profile_default)
+            if(MyApplication.prefs.getString("worker_profile", "").equals("")){
+                profileImage.setImageResource(R.drawable.profile_default)
+            }
+            else{
+                val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
+                val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                profileImage.setImageBitmap(image)
+            }
         }
 
         editbtn.setOnClickListener {
@@ -311,8 +318,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                if(!worker.getString("profile").equals("")){
-                    val imageBytes = Base64.decode(worker.getString("profile"), 0)
+                MyApplication.prefs.setString("worker_profile", worker.getString("profile"))
+
+                if(!MyApplication.prefs.getString("worker_profile", "").equals("")){
+                    val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
                     val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
                     profileImage.setImageBitmap(image)
                 }
@@ -569,7 +578,15 @@ class MainActivity : AppCompatActivity() {
             savebtn.visibility=View.INVISIBLE
             savetext.visibility=View.INVISIBLE
             edittext.visibility=View.VISIBLE
-            profileImage.setImageResource(R.drawable.profile_default)
+
+            if(MyApplication.prefs.getString("worker_profile", "").equals("")){
+                profileImage.setImageResource(R.drawable.profile_default)
+            }
+            else{
+                val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
+                val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                profileImage.setImageBitmap(image)
+            }
         } else {
             super.onBackPressed()
         }
