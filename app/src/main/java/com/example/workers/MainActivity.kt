@@ -23,10 +23,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -115,9 +112,9 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        val navView = binding.mainDrawerView
-        val headerView = navView.getHeaderView(0)
+        var encodeImageString: String? = null
 
+        val headerView = binding.mainDrawerView.getHeaderView(0)
         val editbtn=headerView.findViewById<ImageButton>(R.id.navigationEditBtn)
         val camerabtn=headerView.findViewById<ImageButton>(R.id.navigationCameraBtn)
         val savebtn=headerView.findViewById<ImageButton>(R.id.navigationSaveBtn)
@@ -126,10 +123,16 @@ class MainActivity : AppCompatActivity() {
         val edittext=headerView.findViewById<TextView>(R.id.edittext)
         val savetext=headerView.findViewById<TextView>(R.id.savetext)
 
-        var encodeImageString: String? = null
-
         xbtn.setOnClickListener {
             binding.drawerLayout.closeDrawers()
+
+            camerabtn.visibility=View.INVISIBLE
+            editbtn.visibility=View.VISIBLE
+            savebtn.visibility=View.INVISIBLE
+            savetext.visibility=View.INVISIBLE
+            edittext.visibility=View.VISIBLE
+
+            profileImage.setImageResource(R.drawable.profile_default)
         }
 
         editbtn.setOnClickListener {
@@ -225,23 +228,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             cancelButton.setOnClickListener {
-                savebtn.visibility = View.GONE
-                savetext.visibility = View.GONE
-                editbtn.visibility = View.VISIBLE
-                edittext.visibility = View.VISIBLE
-                camerabtn.visibility=View.GONE
+                dialog.dismiss()
 
-                finish()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                savebtn.visibility = View.VISIBLE
+                savetext.visibility = View.VISIBLE
+                editbtn.visibility = View.GONE
+                edittext.visibility = View.GONE
+                camerabtn.visibility=View.VISIBLE
             }
 
-
-//            dialog.setNeutralButton("사진 다시 선택", DialogInterface.OnClickListener { dialog, which ->
-//                savebtn.visibility = View.VISIBLE
-//                editbtn.visibility = View.GONE
-//                camerabtn.visibility=View.VISIBLE
-//            })
             dialog.show()
         }
 
@@ -272,9 +267,6 @@ class MainActivity : AppCompatActivity() {
                 navEmplId.text = MyApplication.prefs.getString("worker_id", "")
 
                 if(worker.getString("area").equals("")){
-//                    binding.mainName.text = ""
-//                    binding.mainArea.text = name + " 님은 " + today
-//                    binding.mainDate.text = "등록된 작업 일정이 없습니다"
                     binding.mainName.text = name + " 님은 "
                     binding.mainArea.text = today
                     binding.mainDate.text = "등록된 작업 일정이 없습니다"
@@ -563,6 +555,21 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
+
+            val headerView = binding.mainDrawerView.getHeaderView(0)
+            val editbtn=headerView.findViewById<ImageButton>(R.id.navigationEditBtn)
+            val camerabtn=headerView.findViewById<ImageButton>(R.id.navigationCameraBtn)
+            val savebtn=headerView.findViewById<ImageButton>(R.id.navigationSaveBtn)
+            val edittext=headerView.findViewById<TextView>(R.id.edittext)
+            val savetext=headerView.findViewById<TextView>(R.id.savetext)
+            val profileImage=headerView.findViewById<ImageView>(R.id.navigationProfile)
+
+            camerabtn.visibility=View.INVISIBLE
+            editbtn.visibility=View.VISIBLE
+            savebtn.visibility=View.INVISIBLE
+            savetext.visibility=View.INVISIBLE
+            edittext.visibility=View.VISIBLE
+            profileImage.setImageResource(R.drawable.profile_default)
         } else {
             super.onBackPressed()
         }
