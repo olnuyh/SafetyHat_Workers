@@ -55,13 +55,29 @@ class MainActivity : AppCompatActivity() {
     lateinit var toggle : ActionBarDrawerToggle
     lateinit var binding : ActivityMainBinding
     lateinit var speechRecognizer : SpeechRecognizer
+    var changeImage = false
     val database = Firebase.database("https://safetyhat-default-rtdb.asia-southeast1.firebasedatabase.app/")
     val ref = database.getReference("SosMessages")
+
+    override fun onResume() {
+        super.onResume()
+        if(!changeImage){
+            if(MyApplication.prefs.getString("worker_profile", "").equals("")){
+                binding.mainDrawerView.getHeaderView(0).findViewById<ImageView>(R.id.navigationProfile).setImageResource(R.drawable.profile_default)
+            }
+            else{
+                val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
+                val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                binding.mainDrawerView.getHeaderView(0).findViewById<ImageView>(R.id.navigationProfile).setImageBitmap(image)
+            }
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        changeImage = false
         //getFCMToken()
 
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
@@ -166,7 +182,6 @@ class MainActivity : AppCompatActivity() {
             try{
                 var inputStream = contentResolver.openInputStream(it.data!!.data!!)
                 val bitmap = BitmapFactory.decodeStream(inputStream)
-                Log.d("mobileApp", bitmap.toString())
                 inputStream!!.close()
                 inputStream = null
 
@@ -178,6 +193,8 @@ class MainActivity : AppCompatActivity() {
                 resizedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
                 val bytesOfImage: ByteArray = byteArrayOutputStream.toByteArray()
                 encodeImageString = Base64.encodeToString(bytesOfImage, Base64.DEFAULT)
+
+                changeImage = true
 
             }catch (e : Exception){
                 e.printStackTrace()
@@ -213,7 +230,7 @@ class MainActivity : AppCompatActivity() {
                     BuildConfig.API_KEY + "update_worker_profile.php",
                     Response.Listener<String>{ response ->
                         Toast.makeText(this, "사진 등록 성공", Toast.LENGTH_LONG).show()
-                        //MyApplication.prefs.setString("worker_profile", ))
+                        MyApplication.prefs.setString("worker_profile", encodeImageString.toString())
                     },
                     Response.ErrorListener { error ->
                         Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
