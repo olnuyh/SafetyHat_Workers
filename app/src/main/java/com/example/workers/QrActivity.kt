@@ -2,15 +2,14 @@ package com.example.workers
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Base64
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -155,6 +154,7 @@ class QrActivity : AppCompatActivity() {
                                     val dialogEmplId = dialog.findViewById<TextView>(R.id.dialogEmplId)
                                     val dialogContents = dialog.findViewById<TextView>(R.id.dialogContents)
                                     val dialogOkBtn = dialog.findViewById<Button>(R.id.dialogOkBtn)
+                                    val dialogProfile = dialog.findViewById<ImageView>(R.id.dialogProfile)
 
                                     dialogName.text = MyApplication.prefs.getString("worker_name", "")
                                     dialogEmplId.text =
@@ -165,6 +165,14 @@ class QrActivity : AppCompatActivity() {
                                         SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat(
                                             "a HH:mm"
                                         ).format(input) + " 출근을 등록합니다"
+                                    if(MyApplication.prefs.getString("worker_profile", "").equals("")){
+                                        dialogProfile.setImageResource(R.drawable.profile_default)
+                                    }
+                                    else{
+                                        val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
+                                        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                                        dialogProfile.setImageBitmap(image)
+                                    }
                                     dialogOkBtn.setOnClickListener {
                                         finish()
                                         val intent = Intent(this, MainActivity::class.java)
@@ -206,12 +214,21 @@ class QrActivity : AppCompatActivity() {
                                     val dialogEmplId = dialog.findViewById<TextView>(R.id.dialogEmplId)
                                     val dialogContents = dialog.findViewById<TextView>(R.id.dialogContents)
                                     val dialogOkBtn = dialog.findViewById<Button>(R.id.dialogOkBtn)
+                                    val dialogProfile = dialog.findViewById<ImageView>(R.id.dialogProfile)
 
                                     dialogName.text = MyApplication.prefs.getString("worker_name", "")
                                     dialogEmplId.text =
                                         MyApplication.prefs.getString("worker_id", "")
                                     val input = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
                                     dialogContents.text = SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat("a HH:mm").format(input) + " 퇴근을 등록합니다"
+                                    if(MyApplication.prefs.getString("worker_profile", "").equals("")){
+                                        dialogProfile.setImageResource(R.drawable.profile_default)
+                                    }
+                                    else{
+                                        val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
+                                        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                                        dialogProfile.setImageBitmap(image)
+                                    }
                                     dialogOkBtn.setOnClickListener {
                                         finish()
                                         val intent = Intent(this, MainActivity::class.java)
