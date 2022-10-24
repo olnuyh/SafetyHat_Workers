@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -134,66 +135,70 @@ class QrActivity : AppCompatActivity() {
                     Toast.makeText(this, "QR코드 인증이 취소되었습니다.", Toast.LENGTH_SHORT).show()
                 } else { // QR코드가 스캔된 경우
                     if (MyApplication.prefs.getString("worker_status", "").toInt() == 0) { // 출근 등록 시
-                        val workRequest = object : StringRequest(
-                            Request.Method.POST,
-                            BuildConfig.API_KEY + "go_work.php",
-                            Response.Listener<String> { response ->
-                                if (response.toString().equals("-1")) { // QR 인증 실패
-                                    Toast.makeText(this, "등록된 안전모가 아닙니다.", Toast.LENGTH_LONG).show()
-                                } else if (response.toString().equals("0")) { // 안전모 등록 실패
-                                    Toast.makeText(this, "이미 사용중인 안전모입니다.", Toast.LENGTH_LONG)
-                                        .show()
-                                } else { // QR 인증 성공 + 안전모 등록 성공
-                                    val dialog = Dialog(this)
-                                    dialog.setContentView(R.layout.dialog_qr)
-                                    dialog.setCanceledOnTouchOutside(true)
-                                    dialog.setCancelable(false)
-                                    dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        val dialog = Dialog(this)
+                        dialog.setContentView(R.layout.dialog_qr)
+                        dialog.setCanceledOnTouchOutside(true)
+                        dialog.setCancelable(false)
+                        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-                                    val dialogName = dialog.findViewById<TextView>(R.id.dialogName)
-                                    val dialogEmplId = dialog.findViewById<TextView>(R.id.dialogEmplId)
-                                    val dialogContents = dialog.findViewById<TextView>(R.id.dialogContents)
-                                    val dialogOkBtn = dialog.findViewById<Button>(R.id.dialogOkBtn)
-                                    val dialogProfile = dialog.findViewById<ImageView>(R.id.dialogProfile)
+                        val dialogName = dialog.findViewById<TextView>(R.id.dialogName)
+                        val dialogEmplId = dialog.findViewById<TextView>(R.id.dialogEmplId)
+                        val dialogContents = dialog.findViewById<TextView>(R.id.dialogContents)
+                        val dialogOkBtn = dialog.findViewById<Button>(R.id.dialogOkBtn)
+                        val dialogProfile = dialog.findViewById<ImageView>(R.id.dialogProfile)
 
-                                    dialogName.text = MyApplication.prefs.getString("worker_name", "")
-                                    dialogEmplId.text =
-                                        MyApplication.prefs.getString("worker_id", "")
-                                    val input =
-                                        SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
-                                    dialogContents.text =
-                                        SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat(
-                                            "a HH:mm"
-                                        ).format(input) + " 출근을 등록합니다"
-                                    if(MyApplication.prefs.getString("worker_profile", "").equals("")){
-                                        dialogProfile.setImageResource(R.drawable.profile_default)
-                                    }
-                                    else{
-                                        val imageBytes = Base64.decode(MyApplication.prefs.getString("worker_profile", ""), 0)
-                                        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                                        dialogProfile.setImageBitmap(image)
-                                    }
-                                    dialogOkBtn.setOnClickListener {
+                        dialogName.text = MyApplication.prefs.getString("worker_name", "")
+                        dialogEmplId.text =
+                            MyApplication.prefs.getString("worker_id", "")
+                        val input =
+                            SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(response.toString())
+                        dialogContents.text =
+                            SimpleDateFormat("yyyy년 M월 d일").format(input) + "\n" + SimpleDateFormat(
+                                "a HH:mm"
+                            ).format(input) + " 출근을 등록합니다"
+                        if (MyApplication.prefs.getString("worker_profile", "").equals("")) {
+                            dialogProfile.setImageResource(R.drawable.profile_default)
+                        } else {
+                            val imageBytes = Base64.decode(
+                                MyApplication.prefs.getString("worker_profile", ""),
+                                0
+                            )
+                            val image =
+                                BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                            dialogProfile.setImageBitmap(image)
+                        }
+
+                        dialogOkBtn.setOnClickListener {
+                            val workRequest = object : StringRequest(
+                                Request.Method.POST,
+                                BuildConfig.API_KEY + "go_work.php",
+                                Response.Listener<String> { response ->
+                                    if (response.toString().equals("-1")) { // QR 인증 실패
+                                        Toast.makeText(this, "등록된 안전모가 아닙니다.", Toast.LENGTH_LONG).show()
+                                    } else if (response.toString().equals("0")) { // 안전모 등록 실패
+                                        Toast.makeText(this, "이미 사용중인 안전모입니다.", Toast.LENGTH_LONG)
+                                            .show()
+                                    } else { // QR 인증 성공 + 안전모 등록 성공
                                         finish()
                                         val intent = Intent(this, MainActivity::class.java)
                                         startActivity(intent)
                                     }
-                                    dialog.show()
+                                },
+                                Response.ErrorListener { error ->
+                                    Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+                                }) {
+                                override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
+                                    val params: MutableMap<String, String> = HashMap()
+                                    params["worker_pkey"] =
+                                        MyApplication.prefs.getString("worker_pkey", "")
+                                    params["hat_number"] = result.contents
+                                    return params
                                 }
-                            },
-                            Response.ErrorListener { error ->
-                                Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
-                            }) {
-                            override fun getParams(): MutableMap<String, String>? { // API로 전달할 데이터
-                                val params: MutableMap<String, String> = HashMap()
-                                params["worker_pkey"] =
-                                    MyApplication.prefs.getString("worker_pkey", "")
-                                params["hat_number"] = result.contents
-                                return params
                             }
+                            val queue = Volley.newRequestQueue(this)
+                            queue.add(workRequest)
                         }
-                        val queue = Volley.newRequestQueue(this)
-                        queue.add(workRequest)
+                        dialog.show()
                     } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 1) { // 퇴근 등록 시
                         val leaveRequest = object : StringRequest(
                             Request.Method.POST,
