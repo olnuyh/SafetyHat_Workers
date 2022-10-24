@@ -172,7 +172,7 @@ class NotificationActivity: AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val updateProfileRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "update_worker_profile.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "update_worker_profile.php",
                     Response.Listener<String>{ response ->
                         Toast.makeText(this, "사진 등록 성공", Toast.LENGTH_LONG).show()
                         MyApplication.prefs.setString("worker_profile", encodeImageString.toString())
@@ -227,7 +227,7 @@ class NotificationActivity: AppCompatActivity() {
 
         val notificationRequest = JsonArrayRequest( // Volley를 이용한 http 통신
             Request.Method.GET,
-            BuildConfig.API_KEY + "read_notification.php",
+            "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "read_notification.php",
             null,
             Response.Listener<JSONArray> { response ->
                 binding.notificationRecyclerView.layoutManager = LinearLayoutManager(this)

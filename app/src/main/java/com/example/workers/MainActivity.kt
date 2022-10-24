@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val updateProfileRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "update_worker_profile.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "update_worker_profile.php",
                     Response.Listener<String>{ response ->
                         Toast.makeText(this, "사진 등록 성공", Toast.LENGTH_LONG).show()
                         MyApplication.prefs.setString("worker_profile", encodeImageString.toString())
@@ -275,7 +275,7 @@ class MainActivity : AppCompatActivity() {
         val mainRequest = @SuppressLint("ResourceAsColor")
         object : StringRequest(
             Request.Method.POST,
-            BuildConfig.API_KEY + "read_information.php",
+            "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "read_information.php",
             Response.Listener<String>{ response ->
                 val jsonObject = JSONObject(response)
                 val worker = jsonObject.getJSONArray("response").getJSONObject(0)
@@ -476,7 +476,7 @@ class MainActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val sosRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "send_sosnotification.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "send_sosnotification.php",
                     Response.Listener<String>{ response ->
 
                     },

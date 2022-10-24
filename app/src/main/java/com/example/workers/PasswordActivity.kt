@@ -32,7 +32,7 @@ class PasswordActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val findPasswordRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "find_password.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "find_password.php",
                     Response.Listener<String>{ response ->
                         if(response.toString().equals("-1")){ // 비밀번호 찾기 실패
                             Toast.makeText(this, "존재하지 않는 회원입니다.", Toast.LENGTH_LONG).show()

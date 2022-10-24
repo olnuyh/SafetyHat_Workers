@@ -136,7 +136,7 @@ class QrActivity : AppCompatActivity() {
                     if (MyApplication.prefs.getString("worker_status", "").toInt() == 0) { // 출근 등록 시
                         val workRequest = object : StringRequest(
                             Request.Method.POST,
-                            BuildConfig.API_KEY + "go_work.php",
+                            "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "go_work.php",
                             Response.Listener<String> { response ->
                                 if (response.toString().equals("-1")) { // QR 인증 실패
                                     Toast.makeText(this, "등록된 안전모가 아닙니다.", Toast.LENGTH_LONG).show()
@@ -197,7 +197,7 @@ class QrActivity : AppCompatActivity() {
                     } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 1) { // 퇴근 등록 시
                         val leaveRequest = object : StringRequest(
                             Request.Method.POST,
-                            BuildConfig.API_KEY + "leave_work.php",
+                            "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/" + "leave_work.php",
                             Response.Listener<String> { response ->
                                 if (response.toString().equals("-1")) { // QR 인증 실패
                                     Toast.makeText(this, "현재 사용중인 안전모가 아닙니다.", Toast.LENGTH_LONG)
