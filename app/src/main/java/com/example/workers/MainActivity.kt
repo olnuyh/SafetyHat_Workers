@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val updateProfileRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "update_worker_profile.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/update_worker_profile.php",
                     Response.Listener<String>{ response ->
                         Toast.makeText(this, "사진 등록 성공", Toast.LENGTH_LONG).show()
                         MyApplication.prefs.setString("worker_profile", encodeImageString.toString())
@@ -275,7 +275,7 @@ class MainActivity : AppCompatActivity() {
         val mainRequest = @SuppressLint("ResourceAsColor")
         object : StringRequest(
             Request.Method.POST,
-            BuildConfig.API_KEY + "read_information.php",
+            "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/read_information.php",
             Response.Listener<String>{ response ->
                 val jsonObject = JSONObject(response)
                 val worker = jsonObject.getJSONArray("response").getJSONObject(0)
@@ -283,13 +283,19 @@ class MainActivity : AppCompatActivity() {
                 name = worker.getString("name")
                 MyApplication.prefs.setString("worker_name", name)
 
+                val area = worker.getString("area")
+                MyApplication.prefs.setString("worker_area", area)
+
+                status = worker.getString("status").toInt()
+                MyApplication.prefs.setString("worker_status", worker.getString("status"))
+
                 val navName : TextView = headerView.findViewById(R.id.navigationName)
                 val navEmplId : TextView = headerView.findViewById(R.id.navigationEmplId)
 
                 navName.text = name
                 navEmplId.text = MyApplication.prefs.getString("worker_id", "")
 
-                if(worker.getString("area").equals("")){
+                if(area.equals("")){
                     binding.mainName.text = name + " 님은 "
                     binding.mainArea.text = today
                     binding.mainDate.text = "등록된 작업 일정이 없습니다"
@@ -314,9 +320,6 @@ class MainActivity : AppCompatActivity() {
                     val builder2 = SpannableStringBuilder(textData2)
                     builder2.setSpan(colorBlueSpan, 0, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     textView2.text = builder2
-
-                    status = worker.getString("status").toInt()
-                    MyApplication.prefs.setString("worker_status", worker.getString("status"))
 
                     if(status == 0){ // 출근 전 상태
                         binding.workBtn.isEnabled = true
@@ -476,7 +479,7 @@ class MainActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val sosRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "send_sosnotification.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/send_sos_notification.php",
                     Response.Listener<String>{ response ->
 
                     },

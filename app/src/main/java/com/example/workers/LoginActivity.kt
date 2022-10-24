@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     // Volley를 이용한 http 통신
                     val loginRequest = object : StringRequest(
                         Request.Method.POST,
-                        BuildConfig.API_KEY + "workers_login.php",
+                        "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/workers_login.php",
                         Response.Listener<String>{ response ->
                             if(response.toString().equals("-1")){ // 로그인 실패
                                 Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show()

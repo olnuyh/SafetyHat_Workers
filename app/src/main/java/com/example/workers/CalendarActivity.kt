@@ -176,7 +176,7 @@ class CalendarActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val updateProfileRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "update_worker_profile.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/update_worker_profile.php",
                     Response.Listener<String>{ response ->
                         Toast.makeText(this, "사진 등록 성공", Toast.LENGTH_LONG).show()
                         MyApplication.prefs.setString("worker_profile", encodeImageString.toString())
@@ -229,7 +229,7 @@ class CalendarActivity : AppCompatActivity() {
             val calendaruploadRequest = @RequiresApi(Build.VERSION_CODES.M)
             object : StringRequest(
                 Request.Method.POST,
-                BuildConfig.API_KEY + "read_calendar.php",
+                "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/read_schedule.php",
                 Response.Listener<String>{ response ->
 
                     val jsonObject : JSONObject = JSONObject(response)
@@ -246,7 +246,7 @@ class CalendarActivity : AppCompatActivity() {
                             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                             layoutParams.setMargins(130, 40, 0, 0)
                             textView.layoutParams = layoutParams
-                            textView.text = array.getJSONObject(i).getString("calendar_contents")
+                            textView.text = array.getJSONObject(i).getString("schedule_contents")
                             textView.setTextAppearance(R.style.calendar_text)
                             binding.scheduleLayout.addView(textView)
 

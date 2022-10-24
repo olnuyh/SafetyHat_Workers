@@ -179,7 +179,7 @@ class SalaryActivity : AppCompatActivity() {
                 // Volley를 이용한 http 통신
                 val updateProfileRequest = object : StringRequest(
                     Request.Method.POST,
-                    BuildConfig.API_KEY + "update_worker_profile.php",
+                    "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/update_worker_profile.php",
                     Response.Listener<String>{ response ->
                         Toast.makeText(this, "사진 등록 성공", Toast.LENGTH_LONG).show()
                         MyApplication.prefs.setString("worker_profile", encodeImageString.toString())
@@ -270,7 +270,7 @@ class SalaryActivity : AppCompatActivity() {
     fun requestSalary(month : String){
         val salaryRequest = object : StringRequest( // Volley를 이용한 http 통신
             Request.Method.POST,
-            BuildConfig.API_KEY + "worker_salary.php",
+            "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/worker_salary.php",
             Response.Listener<String> { response ->
                 val jsonObject : JSONObject = JSONObject(response)
                 val array = jsonObject.getJSONArray("response")
