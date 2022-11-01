@@ -193,33 +193,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/loginBtn"
-        android:layout_width="150dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="617dp"
-        android:layout_marginEnd="268dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/login_btn2"
-        android:text="로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="635dp"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="2sp"
-        android:textColor="#666666"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        android:fontFamily="@font/a13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="로그인" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

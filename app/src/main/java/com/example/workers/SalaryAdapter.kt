@@ -31,9 +31,20 @@ class SalaryAdapter (val context : Context, val arr : JSONArray) : RecyclerView.
         val salary = arr[position] as JSONObject
 
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(salary.getString("date"))
-
         binding.itemDate.text = SimpleDateFormat("MM월 dd일").format(date)
-        binding.itemTime.text = (salary.getString("time").toInt() / 60).toString() + "시간"
-        binding.itemSum.text = salary.getString("salary") + "원"
+
+        if(salary.getString("time") == "null"){
+            binding.itemTime.text =  "-시간"
+        }
+        else{
+            binding.itemTime.text = (salary.getString("time").toInt() / 60).toString() + "시간"
+        }
+
+        if(salary.getString("salary") == "null"){
+            binding.itemSum.text = "-원"
+        }
+        else{
+            binding.itemSum.text = salary.getString("salary") + "원"
+        }
     }
 }
