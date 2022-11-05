@@ -7,14 +7,15 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -23,7 +24,6 @@ import com.example.workers.databinding.ActivityQrBinding
 import com.google.zxing.integration.android.IntentIntegrator
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 class QrActivity : AppCompatActivity() {
     lateinit var toggle : ActionBarDrawerToggle
@@ -188,11 +188,10 @@ class QrActivity : AppCompatActivity() {
                                         .show()
                                     dialog.dismiss()
                                 } else { // QR 인증 성공 + 안전모 등록 성공
-                                    Toast.makeText(this, "오늘 출근이 등록되었습니다", Toast.LENGTH_LONG)
-                                        .show()
-
-                                    finish()
+                                    Toast.makeText(this, "오늘 출근이 등록되었습니다", Toast.LENGTH_LONG) .show()
+                                    //finish()
                                     val intent = Intent(this, MainActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                     startActivity(intent)
                                 }
                             },
