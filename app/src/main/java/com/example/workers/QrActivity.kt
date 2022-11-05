@@ -14,12 +14,14 @@ import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.workers.databinding.ActivityQrBinding
 import com.example.workers.databinding.DialogQrBinding
+import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import com.google.zxing.integration.android.IntentIntegrator
 import java.text.SimpleDateFormat
 import java.util.*
@@ -74,13 +76,19 @@ class QrActivity : AppCompatActivity() {
             finish()
         }
 
-        if (MyApplication.prefs.getString("worker_status", "").toInt() == 0) { // 출근 등록을 하려는 경우
-            if(MyApplication.prefs.getString("worker_area", "") == ""){
-                binding.qrName.text = "출근 등록"
-                binding.qrContents.text = "오늘 등록된 작업 일정이 없습니다"
-                binding.loginBtn.isEnabled = false
-            }
-            else{
+        binding.goToMainBtn.setOnClickListener {
+            finish()
+        }
+
+        if(MyApplication.prefs.getString("worker_area", "") == "") {
+            binding.qrName.text = "출근 등록"
+            binding.qrContents.text = "오늘 등록된 작업 일정이 없습니다"
+            binding.loginBtn.isEnabled = false
+            binding.loginBtn.setImageResource(R.drawable.no_work)
+            binding.loginBtn.setBackgroundColor(Color.parseColor("#E1E1E1"))
+        }
+        else{
+            if (MyApplication.prefs.getString("worker_status", "").toInt() == 0) { // 출근 등록을 하려는 경우
                 binding.qrName.text = "출근 등록"
 
                 binding.loginBtn.setOnClickListener {
@@ -92,39 +100,34 @@ class QrActivity : AppCompatActivity() {
                     integrator.setBarcodeImageEnabled(false) // 스캔 했을 때 스캔한 이미지 사용여부
                     integrator.initiateScan() // 스캔
                 }
-            }
+            } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 1 || MyApplication.prefs.getString("worker_status", "").toInt() == 3
+            ) { // 퇴근 등록을 하려는 경우
+                binding.qrName.text = "퇴근 등록"
 
-            binding.goToMainBtn.setOnClickListener {
-                finish()
+                binding.loginBtn.setOnClickListener {
+                    val integrator = IntentIntegrator(this)
+                    integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 여러가지 바코드중에 특정 바코드 설정 가능
+                    integrator.setPrompt("QR 코드를 스캔 해주세요") // 스캔할 때 하단의 문구
+                    integrator.setCameraId(0) // 0은 후면 카메라, 1은 전면 카메라
+                    integrator.setBeepEnabled(true) // 바코드를 인식했을 때 삑 소리유무
+                    integrator.setBarcodeImageEnabled(false) // 스캔 했을 때 스캔한 이미지 사용여부
+                    integrator.initiateScan() // 스캔
+                }
+            } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 2) { // 퇴근이 끝난 경우
+                binding.qrName.text = "퇴근 완료"
+                binding.qrContents.text = "오늘 퇴근이 완료되었습니다"
+                binding.loginBtn.isEnabled = false
+                binding.loginBtn.setImageResource(R.drawable.finish_work)
+                binding.loginBtn.setBackgroundColor(Color.parseColor("#E1E1E1"))
             }
-        } else if (MyApplication.prefs.getString("worker_status", "")
-                .toInt() == 1
-        ) { // 퇴근 등록을 하려는 경우
-            binding.qrName.text = "퇴근 등록"
-
-            binding.loginBtn.setOnClickListener {
-                val integrator = IntentIntegrator(this)
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // 여러가지 바코드중에 특정 바코드 설정 가능
-                integrator.setPrompt("QR 코드를 스캔 해주세요") // 스캔할 때 하단의 문구
-                integrator.setCameraId(0) // 0은 후면 카메라, 1은 전면 카메라
-                integrator.setBeepEnabled(true) // 바코드를 인식했을 때 삑 소리유무
-                integrator.setBarcodeImageEnabled(false) // 스캔 했을 때 스캔한 이미지 사용여부
-                integrator.initiateScan() // 스캔
+            else if (MyApplication.prefs.getString("worker_status", "").toInt() == 4) { // 결근한 경우
+                binding.qrName.text = "결근"
+                binding.qrContents.text = "오늘 결근 처리되었습니다."
+                binding.loginBtn.isEnabled = false
+                binding.loginBtn.setImageResource(R.drawable.no_work)
+                binding.loginBtn.setBackgroundColor(Color.parseColor("#E1E1E1"))
             }
-            binding.goToMainBtn.setOnClickListener {
-                finish()
-            }
-        } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 2) { // 퇴근이 끝난 경우
-            binding.qrName.text = "퇴근 완료"
-            binding.qrContents.text = "오늘 퇴근이 완료되었습니다"
-            binding.loginBtn.isEnabled = false
-
-            binding.goToMainBtn.setOnClickListener {
-                finish()
-            }
-
         }
-
 
     }
 

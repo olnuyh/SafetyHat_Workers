@@ -325,11 +325,11 @@ class MainActivity : AppCompatActivity() {
                         binding.workBtn.isEnabled = true
                         binding.workBtn.setImageResource(R.drawable.come_btn)
                     }
-                    else if(status == 1){ // 출근 후, 퇴근 전 상태
+                    else if(status == 1 || status == 3){ // 출근 후, 퇴근 전 상태(정상 출근 혹은 지각)
                         binding.leaveBtn.isEnabled = true
                         binding.leaveBtn.setImageResource(R.drawable.come_btn)
                     }
-                    else if(status == 2){ // 퇴근 후 상태
+                    else if(status == 2 || status == 4){ // 퇴근 후 혹은 결근 상태
                         binding.workBtn.isEnabled = false
                         binding.leaveBtn.isEnabled = false
                         binding.workBtn.setImageResource(R.drawable.out_btn)
