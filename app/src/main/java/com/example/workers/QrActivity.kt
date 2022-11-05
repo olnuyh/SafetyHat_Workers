@@ -20,8 +20,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.workers.databinding.ActivityQrBinding
-import com.example.workers.databinding.DialogQrBinding
-import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import com.google.zxing.integration.android.IntentIntegrator
 import java.text.SimpleDateFormat
 import java.util.*
@@ -183,10 +181,12 @@ class QrActivity : AppCompatActivity() {
                             "http://ec2-15-165-242-180.ap-northeast-2.compute.amazonaws.com/go_work.php",
                             Response.Listener<String> { response ->
                                 if (response.toString().equals("-1")) { // QR 인증 실패
-                                    Toast.makeText(this, "등록된 안전모가 아닙니다", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this, "등록된 안전모가 아닙니다", Toast.LENGTH_SHORT).show()
+                                    dialog.dismiss()
                                 } else if (response.toString().equals("0")) { // 안전모 등록 실패
-                                    Toast.makeText(this, "이미 사용중인 안전모입니다", Toast.LENGTH_LONG)
+                                    Toast.makeText(this, "이미 사용중인 안전모입니다", Toast.LENGTH_SHORT)
                                         .show()
+                                    dialog.dismiss()
                                 } else { // QR 인증 성공 + 안전모 등록 성공
                                     Toast.makeText(this, "오늘 출근이 등록되었습니다", Toast.LENGTH_LONG)
                                         .show()
