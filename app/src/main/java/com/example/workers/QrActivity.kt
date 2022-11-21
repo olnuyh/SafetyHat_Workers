@@ -212,7 +212,7 @@ class QrActivity : AppCompatActivity() {
                     }
                     dialog.show()
 
-                } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 1) { // 퇴근 등록 시
+                } else if (MyApplication.prefs.getString("worker_status", "").toInt() == 1 || MyApplication.prefs.getString("worker_status", "").toInt() == 3) { // 퇴근 등록 시
                     val dialog = Dialog(this)
                     dialog.setContentView(R.layout.dialog_qr)
                     dialog.setCanceledOnTouchOutside(true)
